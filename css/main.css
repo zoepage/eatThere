@@ -1,0 +1,69 @@
+
+/** ---------------------------------------------------------------------- */
+/* @autor: Ola Gasidlo (o.gasidlo@gmail.com)
+/* ----------------------------------------------------------------------- */
+
+body{
+    margin: 0 !important;
+    padding: 0;
+}
+
+.hide{
+    display:none;
+}
+
+/* -------------------------- LAYOUT / Structure -------------------------- */
+
+#logo {
+    width: 160px;
+    border: 1px solid #09f;
+    height: 150px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+
+
+
+#list {
+    font-size: 18px;
+    font-family: tahoma;
+}
+
+    #list ul{
+        list-style: none;
+        margin:0;
+        padding:0;
+    }
+
+        #list ul li{
+            border-top: 1px solid;
+            border-bottom: 1px solid;
+            padding: 15px 25px;
+
+        }
+
+            #list ul li.done{
+                text-decoration: line-through;
+                opacity: 0.5;
+            }
+
+/* -------------------------- LAYOUT / Button -------------------------- */
+menu {
+    width: 100%;
+    height: 51px;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    border-bottom: 1px solid #999;
+}
+
+menu button {
+    height: 45px;
+    width:  45px;
+    background: none;
+    border: 1px solid #999;
+    margin: 3px;
+}
+
+/* -------------------------- COLOR / Themes -------------------------- */
