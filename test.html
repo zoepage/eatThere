@@ -1,15 +1,14 @@
-
-/** ---------------------------------------------------------------------- */
-/* @autor: Ola Gasidlo (o.gasidlo@gmail.com)
-/* ----------------------------------------------------------------------- */
-
-var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.msIndexedDB;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>IndexedDB</title>
+    <script type="text/javascript">
+        var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.msIndexedDB;
         var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
         var db;
-
-(function() {
-	
-    var eatThereData = [
+        (function () {     
+            var eatThereData = [
         { name: "Currybox", str: "Boxhagenerstr. 21", ort:"11245 Berlin", flag: "y" },
         { name: "Frittiersalon", adresse: "Boxhagenerstr. 128", ort:"11245 Berlin", flag: "n" },
         { name: "Zeus", adresse: "Boxhagenerstr. 19", ort:"11245 Berlin", flag: "n" },
@@ -40,14 +39,12 @@ var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedD
             }
        };
     }
-
-    function contentLoaded() {
-
-        initDb();               
-                
-                var btnPrint= document.getElementById("logo");/* 
+ 
+            function contentLoaded() {
+                initDb();                
+                var btnAdd = document.getElementById("btnAdd");
                 var btnDelete = document.getElementById("btnDelete");
-                var btnAdd = document.getElementById("btnPrint");                
+                var btnPrint = document.getElementById("btnPrint");                
  
                 btnAdd.addEventListener("click", function () {
                     var name = document.getElementById("txtName").value;
@@ -79,18 +76,20 @@ var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedD
                         console.log("FAIL DELETE");
                     };
                 }, false);
-*/ 
+ 
                 btnPrint.addEventListener("click", function () {
-                var transaction = db.transaction("eatThere", 'readonly');
+                    var output = document.getElementById("printOutput");
+                    output.textContent = "";
+ 
+                    var transaction = db.transaction("eatThere", 'readonly');
                     var objectStore = transaction.objectStore("eatThere");
  
                     var request = objectStore.openCursor();
                     request.onsuccess = function(e) {  
-                        console.log("done PRINT");
                         var cursor = e.target.result;  
                         if (cursor) {  
-                            console.log( "id: " + cursor.key + 
-                                        " / name: " + cursor.value.name + "   -------------   " );                            
+                            output.textContent += "id: " + cursor.key + 
+                                        " / name: " + cursor.value.name + "   -------------   " ;                            
                             cursor.continue();  
                         }  
                         else {  
@@ -100,11 +99,38 @@ var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedD
                     request.error = function (e) {
                         console.log("FAIL PRINT");
                     };
-
                 }, false);              
-
             }
-
-
-window.addEventListener("DOMContentLoaded", contentLoaded, false); 
-}());
+ 
+            window.addEventListener("DOMContentLoaded", contentLoaded, false); 
+    })();       
+    </script>
+</head>
+<body>
+    <div id="container">
+        <label for="txtName">
+            Name:
+        </label>
+        <input type="text" id="txtName" name="txtName" />
+        <br />
+        <label for="txtadresse">
+            adresse:
+        </label>
+        <input type="adresse" id="txtadresse" name="txtadresse" />
+        <br />
+        <input type="button" id="btnAdd" value="Add Record" />
+        <br />
+        <label for="txtID">
+            ID:
+        </label>
+        <input type="text" id="txtID" name="txtID" />
+        <br />
+        <input type="button" id="btnDelete" value="Delete Record" />
+        <br />
+        <input type="button" id="btnPrint" value="Print objectStore" />
+        <br />
+        <output id="printOutput">
+        </output>
+    </div>
+</body>
+</html>
