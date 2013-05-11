@@ -3,67 +3,214 @@
 /* @autor: Ola Gasidlo (o.gasidlo@gmail.com)
 /* ----------------------------------------------------------------------- */
 
-body{
-    margin: 0 !important;
-    padding: 0;
-}
-
-.hide{
-    display:none;
-}
-
-/* -------------------------- LAYOUT / Structure -------------------------- */
-
-#logo {
-    width: 160px;
-    border: 1px solid #09f;
-    height: 150px;
-    margin: 10px auto;
-    text-align: center;
-}
-
-
-
-
-#list {
-    font-size: 18px;
-    font-family: tahoma;
-}
-
-    #list ul{
-        list-style: none;
-        margin:0;
-        padding:0;
-    }
-
-        #list ul li{
-            border-top: 1px solid;
-            border-bottom: 1px solid;
-            padding: 15px 25px;
-
-        }
-
-            #list ul li.done{
-                text-decoration: line-through;
-                opacity: 0.5;
-            }
-
-/* -------------------------- LAYOUT / Button -------------------------- */
-menu {
-    width: 100%;
-    height: 51px;
+html, body {
+    height: 100%;
+    background-color: #ebebeb;
     margin: 0;
     padding: 0;
-    text-align: right;
-    border-bottom: 1px solid #999;
+    overflow: hidden;
 }
 
-menu button {
-    height: 45px;
-    width:  45px;
-    background: none;
-    border: 1px solid #999;
-    margin: 3px;
+    #wrap {
+        min-height: 100%;
+        height:auto !important;
+        height:100%;
+        overflow: hidden !important;
+        position: absolute;
+        width: 100%;
+        background: url(../img/bg.png) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding: 0 0 10px;
+    }
+
+        #stage {
+            width: 320px;
+            height: 380px;
+            margin: 60px auto;
+             
+        }
+
+        .stageOn .list{
+             background-color: rgba(255,255,255,0.7); 
+             padding: 5px 35px 10px;
+        }
+
+        
+
+/* -------------------------- submenu & buttons -------------------------- */
+        #logo {
+            height: 215px;
+            width: 200px;
+            background: url(../img/logo.png) no-repeat;
+            margin: 100px auto;
+            cursor: pointer;
+        }
+
+        .stageOn #logo {
+            margin-top: 45px;
+        }
+
+    ul {
+        list-style: none;
+    }
+
+
+    menu {
+        height: 40px;
+        padding: 0 10px;
+        z-index: 500;
+    }
+        menu > * {
+            float: right;
+        }
+
+        #btn {
+            
+        }
+        
+        .btn {
+            height: 40px;
+            width: 40px;  
+            background: url(../img/btn.png) no-repeat;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+
+            .up {
+                background-position: right bottom;
+            }
+
+            .hide .up {
+                background-position: right top;
+            }
+
+            .new {
+                background-position: left bottom;
+            }
+
+            .check {
+                background-position: center bottom;
+            }
+
+            .cancel {
+                background-position: center top;
+            }
+
+            .back {
+                background-position: left top;
+            }
+            
+            menu ul {
+                top: 41px;
+                right: 13px;
+                position: absolute;
+            }
+                menu ul li {
+                    height: 36px;
+                    width: 180px;
+                    background-color: rgba(45, 45, 45, 0.7);
+                    margin-bottom: 1px;
+                    padding: 2px 10px 0;
+                }
+            #eatery ul{
+                margin-left: -50px;
+                overflow: auto;
+                height: 310px;
+            }
+
+            #eatery ul li{
+                border-bottom:1px solid rgba(45, 45, 45, 0.4);
+                padding: 5px;
+            }
+
+.hide li, .hide .list{
+    display: none;
 }
 
-/* -------------------------- COLOR / Themes -------------------------- */
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+
+/* -------------------------- TYPO -------------------------- */
+
+html, body {
+    font-family: 'Amatic SC', cursive;
+}
+
+menu ul li {
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+span, li {
+    color:#184640;
+}
+
+.title{
+    font-size: 48px;
+}
+
+.str, .ort{
+    font-size: 24px;
+}
+
+#eatery ul li{
+    font-size: 30px;                
+}
+
+h1 {
+    font-size: 48px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+/* -------------------------- COLOR / Themes -------------------------- 
+
+@media (max-height: 480px) {
+    #list {
+       height:421px;
+    }
+    #list ul{
+        height:259px;
+    }
+}
+
+@media (min-height: 481px) and (max-height: 640px) {
+    #list {
+        height:511px;
+    }
+    #list ul{
+        height:418px;
+    }
+}
+
+@media (min-height: 641px) {
+    #list {
+        min-height: 641px;
+        max-height: 750px;;
+    }
+    #list ul{
+        height: 650px;
+    }
+}
+*/

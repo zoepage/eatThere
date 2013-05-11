@@ -8,30 +8,56 @@ var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedD
         var db;
 
 (function() {
-	
+
+// ---------- fcn - UI ------------------------------------
+// ---------------------------------------------------------
+    var stage   = jQuery('#stage');
+    var btn     = jQuery('#btn');
+    var menu    = jQuery('menu');
+    var logo    = jQuery('#logo');
+
+   btn.bind('click',function(){
+        menu.toggleClass('hide');
+   });
+
+   logo.bind('click',function(){
+       if(stage.hasClass('hide')){
+            stage.removeClass("hide");
+            stage.children().fadeIn(500);
+       }
+    });
+
+
+// ---------- indexedDB ------------------------------------
+// ---------------------------------------------------------
+
+    /* ------------ test data --------- */
     var eatThereData = [
-        { name: "Currybox", str: "Boxhagenerstr. 21", ort:"11245 Berlin", flag: "y" },
+        { name: "Currybox", adresse: "Boxhagenerstr. 21", ort:"11245 Berlin", flag: "y" },
         { name: "Frittiersalon", adresse: "Boxhagenerstr. 128", ort:"11245 Berlin", flag: "n" },
         { name: "Zeus", adresse: "Boxhagenerstr. 19", ort:"11245 Berlin", flag: "n" },
         { name: "Bäcker", adresse: "Boxhagenerstr. 17", ort:"11245 Berlin", flag: "y" }
     ];
 
     function initDb() {
+    /* ------- drop database -------
+        var request = indexedDB.deleteDatabase("eatThereDB", 1);
+        request.onsuccess = function (e) { alert('done');}
+    */
+        
         var request = indexedDB.open("eatThereDB", 1);                          //eatThere, Version 1 - open
         request.onsuccess = function (e) {                                      // done!
             db = request.result;                                                            
         };
-
         request.onerror = function (e) {                                        // fail!
             console.log("IndexedDB error: " + e.target.errorCode);
         };
-
         request.onupgradeneeded = function (e) {                                // change! - adding structure
             var objectStore = e.currentTarget.result.createObjectStore(
-                     "eatThere", { keyPath: "id", autoIncrement: true }
+                     "eatThereDB", { keyPath: "id", autoIncrement: true }
                 );
             objectStore.createIndex("name", "name", { unique: false });
-            objectStore.createIndex("str", "str", { unique: false });
+            objectStore.createIndex("adresse", "adresse", { unique: false });
             objectStore.createIndex("ort", "ort", { unique: false });
             objectStore.createIndex("flag", "flag", { unique: false });
 
@@ -42,10 +68,49 @@ var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedD
     }
 
     function contentLoaded() {
+        initDb(); 
 
-        initDb();               
+            //* ------------- get data from db -----------------
+            var btnPrint = document.getElementById("logo"); 
+            btnPrint.addEventListener("click", function () {
+                var transaction = db.transaction("eatThereDB", 'readonly');
+                var objectStore = transaction.objectStore("eatThereDB");
+ 
+                //* ------------- count cursor's & give out a random one -----------------
+                var request = objectStore.count();
+                request.onsuccess = function(e) {  
+                    var cursor      = e.target.result;
+                    var r           = Math.floor((Math.random()*cursor)+1); 
+
+                    var request = objectStore.openCursor(r);
+                    request.onsuccess = function(e) {
+                        var cursor      = e.target.result;
+
+                        var title       = cursor.value.name;
+                        var adr         = cursor.value.adresse;
+                        var ort         = cursor.value.ort;
+                        var eat         = jQuery("#eatery");
+
+                        eat.find('span.title').text(title);
+                        eat.find('span.str').text(adr);
+                        eat.find('span.ort').text(ort);
+                    };
+
+                    request.error = function (e) {
+                    var eat         = jQuery("#eatery");
+
+                    eat.find('span.title').text("error");
+                    eat.find('span.str').text("error");
+                    eat.find('span.ort').text("error");
+                    };
+                };
+                request.error = function (e) {
+                    alert('DB.open did fail!');
+                }; 
+
+            }, false);              
                 
-                var btnPrint= document.getElementById("logo");/* 
+            /* 
                 var btnDelete = document.getElementById("btnDelete");
                 var btnAdd = document.getElementById("btnPrint");                
  
@@ -80,30 +145,9 @@ var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedD
                     };
                 }, false);
 */ 
-                btnPrint.addEventListener("click", function () {
-                var transaction = db.transaction("eatThere", 'readonly');
-                    var objectStore = transaction.objectStore("eatThere");
- 
-                    var request = objectStore.openCursor();
-                    request.onsuccess = function(e) {  
-                        console.log("done PRINT");
-                        var cursor = e.target.result;  
-                        if (cursor) {  
-                            console.log( "id: " + cursor.key + 
-                                        " / name: " + cursor.value.name + "   -------------   " );                            
-                            cursor.continue();  
-                        }  
-                        else {  
-                            console.log("No more entries!");  
-                        }  
-                    };  
-                    request.error = function (e) {
-                        console.log("FAIL PRINT");
-                    };
+                             
 
-                }, false);              
-
-            }
+     }
 
 
 window.addEventListener("DOMContentLoaded", contentLoaded, false); 
