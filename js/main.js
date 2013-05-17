@@ -13,17 +13,26 @@ var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedD
 // ---------------------------------------------------------
     var stage   = jQuery('#stage');
     var btn     = jQuery('#btn');
-    var menu    = jQuery('menu');
+    var menu    = jQuery('menu ul');
     var logo    = jQuery('#logo');
 
-   btn.bind('click',function(){
+    function toggleMenu(){
+        if(btn.hasClass('up')) {
+            btn.removeClass('up').addClass('down');
+        }
+        else if(btn.hasClass('down')) {
+            btn.removeClass('down').addClass('up');
+        } 
         menu.toggleClass('hide');
-   });
+    }
 
-   logo.bind('click',function(){
-       if(stage.hasClass('hide')){
-            stage.removeClass("hide");
-            stage.children().fadeIn(500);
+    btn.bind('click', toggleMenu);
+
+    logo.bind('click',function(){
+       if($('#eatery').hasClass('hide')){
+            $('#eatery').fadeIn(500);
+       } else {
+        $('#eatery').fadeOut(500);
        }
     });
 
@@ -67,23 +76,19 @@ var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedD
        };
     }
 
-    function contentLoaded() {
-        initDb(); 
-
-            //* ------------- get data from db -----------------
-            var btnPrint = document.getElementById("logo"); 
-            btnPrint.addEventListener("click", function () {
-                var transaction = db.transaction("eatThereDB", 'readonly');
-                var objectStore = transaction.objectStore("eatThereDB");
+    function loadContent() {
+        //* ------------- get data from db -----------------
+        var transaction = db.transaction("eatThereDB", 'readonly');
+        var objectStore = transaction.objectStore("eatThereDB");
  
-                //* ------------- count cursor's & give out a random one -----------------
-                var request = objectStore.count();
-                request.onsuccess = function(e) {  
-                    var cursor      = e.target.result;
-                    var r           = Math.floor((Math.random()*cursor)+1); 
+            //* ------------- count cursor's & give out a random one -----------------
+            var request = objectStore.count();
+            request.onsuccess = function(e) {  
+                var cursor      = e.target.result;
+                var r           = Math.floor((Math.random()*cursor)+1); 
 
-                    var request = objectStore.openCursor(r);
-                    request.onsuccess = function(e) {
+                var request = objectStore.openCursor(r);
+                request.onsuccess = function(e) {
                         var cursor      = e.target.result;
 
                         var title       = cursor.value.name;
@@ -97,18 +102,64 @@ var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedD
                     };
 
                     request.error = function (e) {
-                    var eat         = jQuery("#eatery");
+                        var eat = jQuery("#eatery");
 
-                    eat.find('span.title').text("error");
-                    eat.find('span.str').text("error");
-                    eat.find('span.ort').text("error");
+                        eat.find('span.title').text("error");
+                        eat.find('span.str').text("error");
+                        eat.find('span.ort').text("error");
                     };
-                };
-                request.error = function (e) {
-                    alert('DB.open did fail!');
-                }; 
+                    };
+            request.error = function (e) {
+                alert('DB.open did fail!');
+            }; 
+    } 
 
-            }, false);              
+    function loadList() {
+
+        var eateryView = jQuery('#eateryView');
+        
+        $('#logo').fadeOut(400);
+        $('#eatery').fadeOut(400);
+        eateryView.delay(400).fadeIn(600);
+
+        if(!eateryView.hasClass('loaded')) {
+
+            //* ------------- get data from db -----------------  
+            var transaction = db.transaction("eatThereDB", 'readonly');
+            var objectStore = transaction.objectStore("eatThereDB");
+
+            var request = objectStore.openCursor();
+            request.onsuccess = function(e) {
+                var cursor      = e.target.result;
+                var eatList     = jQuery("#eateryView ul");
+
+                if(cursor) {
+                    console.log(cursor.value.name);
+                    eatList.append("<li>" + cursor.value.name + "</li>");
+                    cursor.continue();
+                }
+                eateryView.addClass('loaded'); 
+                toggleMenu();
+            };
+
+            request.error = function (e) {
+                var eat = jQuery("#eatery");
+
+                eat.find('span.title').text("error");
+            };
+        }
+    } 
+
+    function contentLoaded() {
+        initDb(); 
+
+            //* ------------- get id's -----------------
+            var btnPrint    = document.getElementById("logo"); 
+            var btnViewList = document.getElementById("viewList"); 
+
+            //* ------------- bind's -----------------
+            btnPrint.addEventListener("click", loadContent, false);
+            btnViewList.addEventListener("click", loadList, false);   
                 
             /* 
                 var btnDelete = document.getElementById("btnDelete");
@@ -149,6 +200,6 @@ var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedD
 
      }
 
-
 window.addEventListener("DOMContentLoaded", contentLoaded, false); 
+
 }());

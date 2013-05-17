@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" manifest="shoptilldrop.manifest">
+<html class="no-js">
     <head>
         <meta charset="utf-8">
         <title>Shopping-Liste</title>
@@ -18,21 +18,29 @@
     </head>
     <body class="stageOn">
         <div id="wrap">
-            <menu class="hide">
+            <menu>
                 <div id="btn" class="btn up"></div>
-                <ul>
-                    <li><a href="eatly.html#eatryadd" title="add eatery">add eatry</a></li>
-                    <li><a href="eatly.html#eatrylist" title="view eaterylist">view eatrylist</a></li>
+                <ul class="hide">
+                    <li><a href="#!eatryadd" title="add eatery">add eatry</a></li>
+                    <li><a id="viewList" href="#!eatrylist" title="view eaterylist">view eatrylist</a></li>
                     <li><a href="mailto:o.gasidlo@gmail.com?subject=Bugreport eat.There" title="send bugreport">bugreport</a></li>
                 </ul>
             </menu>
-            <div id="stage" class="hide">
-                <div id="eatery" class="list" style="display:none;">
+            <div id="stage">
+                <div id="eatery" class="list hide">
                     <span class="title">Currybox</span><br />
                     <span class="str">Boxhagenerstr. 129</span><br />
                     <span class="ort">11245 Berlin</span>
                 </div>
                 <div id="logo"></div>
+                <div id="eateryView" class="list hide">
+                    <h1>Eatery </h1>
+                    <a class="absolute" href="index.html"><div class="btn back"></div></a>
+                    <div class="btn new absolute"></div>
+                    <ul>
+                        
+                    </ul>
+                </div>
             </div>
         </div>
         <script src="js/jquery-1.9.1.min.js"></script>

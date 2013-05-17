@@ -83,12 +83,13 @@ html, body {
                 background-position: right bottom;
             }
 
-            .hide .up {
+            .down {
                 background-position: right top;
             }
 
             .new {
                 background-position: left bottom;
+                margin-left: 290px;
             }
 
             .check {
@@ -101,6 +102,7 @@ html, body {
 
             .back {
                 background-position: left top;
+                margin-left: -80px;
             }
             
             menu ul {
@@ -115,18 +117,18 @@ html, body {
                     margin-bottom: 1px;
                     padding: 2px 10px 0;
                 }
-            #eatery ul{
+            #eateryView ul{
                 margin-left: -50px;
                 overflow: auto;
                 height: 310px;
             }
 
-            #eatery ul li{
+            #eateryView ul li{
                 border-bottom:1px solid rgba(45, 45, 45, 0.4);
                 padding: 5px;
             }
 
-.hide li, .hide .list{
+.hide{
     display: none;
 }
 
@@ -138,6 +140,10 @@ html, body {
     float: left;
 }
 
+.absolute {
+    position: absolute;
+    margin-top: 4px;
+}
 
 /* -------------------------- TYPO -------------------------- */
 
@@ -166,7 +172,7 @@ span, li {
     font-size: 24px;
 }
 
-#eatery ul li{
+#eateryView ul li{
     font-size: 30px;                
 }
 
