@@ -2,9 +2,9 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>Shopping-Liste</title>
+        <title>eatThere</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+       <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
         <meta name="autor" content="Ola Gasidlo (o.gasidlo@gmail.com)">
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -17,33 +17,57 @@
 
     </head>
     <body class="stageOn">
-        <div id="wrap">
+        <div id="wrap">       
             <menu>
-                <div id="btn" class="btn up"></div>
-                <ul class="hide">
-                    <li><a href="#!eatryadd" title="add eatery">add eatry</a></li>
-                    <li><a id="viewList" href="#!eatrylist" title="view eaterylist">view eatrylist</a></li>
+                <button id="menu" class="btn up" />
+                <ul class="hide">    
                     <li><a href="mailto:o.gasidlo@gmail.com?subject=Bugreport eat.There" title="send bugreport">bugreport</a></li>
+                    <li><a href="" title="donate">Donate a coffee</a></li>
                 </ul>
             </menu>
-            <div id="stage">
-                <div id="eatery" class="list hide">
+
+            <div id="stagePerson" class="stage">
+                <div id="peopleView" class="list">
+                    <ul>
+                        <li><h2>People</h2></li>
+                        <li>Mark</li>
+                        <li>Sarah</li>
+                        <li>Daniel</li>
+                        <li>Tim</li>
+                        <li>John</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="stageMain" class="stage active">
+                 <div id="eatery" class="list hide">
                     <span class="title">Currybox</span><br />
                     <span class="str">Boxhagenerstr. 129</span><br />
                     <span class="ort">11245 Berlin</span>
                 </div>
                 <div id="logo"></div>
-                <div id="eateryView" class="list hide">
-                    <h1>Eatery </h1>
-                    <a class="absolute" href="index.html"><div class="btn back"></div></a>
-                    <div class="btn new absolute"></div>
+            </div>
+            <div id="stageList" class="stage">
+                <div id="eateryView" class="list">
+                    
+                    <!--
+                    <input type="text" id="addEateryValue" value="" class="hide" />
+                    <button id="btnNew" class="btn new"></button>
+                -->
                     <ul>
-                        
+                        <li><h2>Eatery</h2></li>
+                        <li>Thai</li>
+                        <li>Bäcker</li>
+                        <li>Currybox</li>
+                        <li>Happy Happy Ding Dong</li>
+                        <li>Boomerang</li>
+                    </ul>
                     </ul>
                 </div>
             </div>
         </div>
+        <!-- @ToDo: add touch-lib -> swipe r/l & switch inbetween stages -->
         <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/jquery-hammer-min.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>
