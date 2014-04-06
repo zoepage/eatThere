@@ -1,8 +1,8 @@
 /** ---------------------------------------------------------------------- */
 /* @autor: Ola Gasidlo (o.gasidlo@gmail.com)
 /* ----------------------------------------------------------------------- */
-// initialize Hoodie
 
+window.hoodie = new Hoodie();
 
 $(function() {
 
@@ -12,6 +12,7 @@ $(function() {
     var environment,
         logger,
         hoodie,
+        $eateryItem,
         $btn,
         $menu,
         $logo,
@@ -89,15 +90,15 @@ $(function() {
 
 
     // ------- edit item -------
-    // ******* @ToDo add edit for storage
-    function editItem() {
-        logger.debug('\t--> editItem', this);
+
+    function handleEateryTitleHold(evnt) {
+        logger.debug('\t--> handleEateryTitleHold');
 
         var $listItem,
             animation,
             duration;
 
-        $listItem = $(this);
+        $listItem = $(evnt.currentTarget);
         duration  = 600;
 
         if($listItem.hasClass('open')) {
@@ -114,6 +115,12 @@ $(function() {
         $listItem
             .animate(animation, duration)
             .toggleClass('open');
+
+    }
+
+    function handleEateryItemHold(evnt) {
+        logger.debug('\t--> handleEateryItemHold');
+        handleEateryTitleHold(evnt);
     }
 
     // ------- delete item -------
@@ -122,14 +129,15 @@ $(function() {
         $(this).remove();
     }
 
-
     function initBindings() {
-        logger.debug('\t --> initBindings');
+        logger.debug('\t--> initBindings');
 
-        // ------- bind THIS SHIT! <3 ------- 
-        $item.hammer().on('tap', toggleItem);
-        $item.hammer().on('hold', editItem);
+        // @TODO: implement event with hoodie actions
+        // $eateryItem.hammer().on('tap', toggleItem);
+
         $btn.bind('click', toggleMenu);
+
+
 
         // ******* @ToDo add dragright / dragleft event for mobiel
 
@@ -152,9 +160,10 @@ $(function() {
 
 
     function initGlobals() {
-        logger.debug('\t --> initGlobals');
+        logger.debug('\t--> initGlobals');
 
-        hoodie     = new Hoodie();
+        $eateryItem = $('#eateryView li ')
+
         $btn       = $('#menu');
         $menu      = $('menu ul');
         $logo      = $('#logo');
@@ -177,7 +186,6 @@ $(function() {
         };
     }
 
-
     function startApp() {
         environment = ENV_DEV;
         initLogger();
@@ -185,8 +193,24 @@ $(function() {
         logger.debug('Starting eatThere');
         initGlobals();
         initBindings();
+
+        $('body').on('click.hoodie.data-api', '[data-hoodie-action]', function(evnt) {
+            // @TODO: extract this as a seperate event handler
+            var eventHandlers,
+                action;
+
+            eventHandlers = {
+                'addEatery':handleEateryTitleHold
+            }
+            action = $(this).attr('data-hoodie-action');
+
+            if(typeof eventHandlers[action] === 'function') {
+                eventHandlers[action](evnt);
+            }
+        });
     }
 
+    // pseudo main
 
     startApp();
 
