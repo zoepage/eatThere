@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+        <meta name="autor" content="Ola Gasidlo (o.gasidlo@gmail.com)">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
+        <link rel="apple-touch-icon-precomposed" href="assets/img/apple-touch-icon.png" />
+
+        <link href='http://fonts.googleapis.com/css?family=Roboto:300, 400' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="assets/css/main.css">
+        
+        <title>eatHoodie</title>
+
+    </head>
+    <body class="stageOn">
+        <div id="wrap">       
+            <menu>
+                <button id="menu" class="btn up" />
+                <ul class="hide">    
+                    <li><a href="mailto:o.gasidlo@gmail.com?subject=Bugreport eat.There" title="send bugreport">bugreport</a></li>
+                    <li><a href="https://www.gittip.com/zoepage/" target="_blank" title="donate">GITTIP</a></li>
+                </ul>
+            </menu>
+
+            <div id="stagePerson" class="stage">
+                <div id="peopleView" class="list">
+                    <ul>
+                        <li><h2>People</h2></li>
+                        <li>Mark</li>
+                        <li>Sarah</li>
+                        <li>Daniel</li>
+                        <li>Tim</li>
+                        <li>John</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="stageMain" class="stage active">
+                 <div id="eatery" class="list hide">
+                    <span class="title">Currybox</span><br />
+                    <span class="str">Boxhagenerstr. 129</span><br />
+                    <span class="ort">11245 Berlin</span>
+                </div>
+                <div id="logo"></div>
+            </div>
+            <div id="stageList" class="stage">
+                <div id="eateryView" class="list">
+                    
+                    <!--
+                    <input type="text" id="addEateryValue" value="" class="hide" />
+                    <button id="btnNew" class="btn new"></button>
+                -->
+                    <ul>
+                        <li><h2>Eatery</h2></li>
+                        <li>Thai</li>
+                        <li>Bäcker</li>
+                        <li>Currybox</li>
+                        <li>Happy Happy Ding Dong</li>
+                        <li>Boomerang</li>
+                    </ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- @ToDo: add touch-lib -> swipe r/l & switch inbetween stages -->
+
+
+        <script src="assets/vendor/jquery-2.1.0.min.js"></script>
+        <script src="assets/vendor/jquery-hammer-min.js"></script>
+        <script src="assets/vendor/bootstrap/bootstrap.js"></script>
+
+        <!-- Load the dynamic version of hoodie.js that includes all the plugin code-->
+        <script src="/_api/_files/hoodie.js"></script>
+
+        <script src="assets/vendor/hoodie.accountbar.bootstrap.js"></script>
+    <!--    <script src="assets/vendor/bootstrap.modalform.js"></script> -->
+        <script src="assets/js/main.js"></script>
+    </body>
+</html>
