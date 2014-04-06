@@ -5,7 +5,7 @@
 
 html, body {
     height: 100%;
-    background-color: #ebebeb;
+    background-color: #;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -19,7 +19,7 @@ html, body {
         overflow: hidden !important;
         position: absolute;
         width: 300%;
-        background: url(../img/bg.png) no-repeat center center fixed; 
+        background: url(../img/bg.png) no-repeat center center fixed;  
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -39,6 +39,9 @@ html, body {
             margin: 2em;
             text-align: center;
             font-size: 1.6em;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
         }
 
         
@@ -62,16 +65,9 @@ html, body {
 
     ul {
         list-style: none;
+        margin: 0;
     }
 
-
-    menu {
-        margin-top: 30px;
-        height: 40px;
-        padding: 0 10px;
-        z-index: 500;
-        position: relative;
-    }
 
     .hoodie-accountbar {
         position: absolute;
@@ -84,69 +80,19 @@ html, body {
             color: #fff;
         }
 
-        button,
-        button:active, 
-        button:focus {
-            outline: none;
-            border: 0 none;
-        }
-        
-        .btn_m {
-            height: 40px;
-            width: 40px;  
-            background: url(../img/btn.png) no-repeat;
-            margin-left: 15px;
-            cursor: pointer;
+        .hoodie-accountbar .hoodie-username {
+            display: inline-block;
+            margin-right: 7px;
         }
 
-            .up {
-                background-position: right bottom;
-            }
-
-            .down {
-                background-position: right top;
-            }
-
-            .new {
-                background-position: left bottom;
-                margin-left: 290px;
-            }
-
-            .check {
-                background-position: center bottom;
-            }
-
-            .cancel {
-                background-position: center top;
-            }
-
-            .back {
-                background-position: left top;
-                margin-left: -80px;
-            }
-            
-            menu ul {
-                top: 30px;
-                left: -15px;
-                position: absolute;
-            }
-                menu ul li {
-                    height: 40px;
-                    width: 120px;
-                    background-color: rgba(45, 45, 45, 0.7);
-                    margin-bottom: 1px;
-                    padding: 2px 10px 0;
-                    line-height: 40px;
-                }
-            .stage ul{
-                margin-left: -50px;
+        .stage ul{
                 overflow: auto;
                 height: 310px;
             }
 
             .stage ul li{
                 border-bottom:1px solid rgba(45, 45, 45, 0.4);
-                padding: 10px;
+                padding: 18px 10px;
             }
 
 /* --------------------- stages -------------------*/
@@ -154,7 +100,8 @@ html, body {
 .stage {
     width:33%;
     position: absolute;
-    z-index: 400;
+    z-index: 400;   
+    top: 60px; 
 }
 
 @media (max-width: 800px) {
@@ -207,11 +154,6 @@ html, body {
 
 }
 
-menu ul li {
-    font-size: 16px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-}
 
 a {
     text-decoration: none;
@@ -222,17 +164,12 @@ span, li {
     color:#184640;
 }
 
-.title{
-    font-size: 42px;
-    font-weight: 400;
-}
-
 .str, .ort,
 .stage ul li{
     font-size: 24px;
 }
 
-h2 {
+h2, .title {
     font-size: 48px;
     margin-top: 0px;
     margin-bottom: 10px;
