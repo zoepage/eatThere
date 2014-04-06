@@ -2,18 +2,26 @@
 /* @autor: Ola Gasidlo (o.gasidlo@gmail.com)
 /* ----------------------------------------------------------------------- */
 // initialize Hoodie
-var hoodie  = new Hoodie();
 
 
 $(function() {
 
+    var ENV_DEV  = 'dev',
+        ENV_PROD = 'prod';
+
+    var environment,
+        logger,
+        hoodie,
+        $btn,
+        $menu,
+        $logo,
+        $eatery,
+        $stage,
+        $item,
+        hammertime;
+
 // ---------- fcn - UI ------------------------------------
 // --------------------------------------------------------
-    var btn     = $('#menu');
-    var menu    = $('menu ul');
-    var logo    = $('#logo');
-    var eatery  = $('#eatery');
-    var stage   = $('#wrap');
 
     function toggleMenu(){
         if(btn.hasClass('up')) {
@@ -22,18 +30,9 @@ $(function() {
         else if(btn.hasClass('down')) {
             btn.removeClass('down').addClass('up');
         } 
+
         menu.toggleClass('hide');
     }
-
-    btn.bind('click', toggleMenu);
-
-    Hammer(logo).on('tap',function(){
-       if(eatery.hasClass('hide')){
-            eatery.fadeIn(500);
-       } else {
-        eatery.fadeOut(500);
-       }
-    });
 
     function changeStage(direction){
         var active = $('.active');
@@ -78,23 +77,9 @@ $(function() {
        
     }
 
-    var hammertime = stage.hammer();
-
-    // ******* @ToDo add dragright / dragleft event for mobiel
-
-    hammertime.on("swipeleft", function(ev) {
-      changeStage('right');
-    });
-
-    hammertime.on("swiperight ", function(ev) {
-      changeStage('left');
-    });
 
 
     /** ============== List edit Events ============== */
-
-    var item = $('.stage ul li');
-
 
     // ------- line through item -------
     // ******* @ToDo add edit for flag (y/n)
@@ -105,19 +90,30 @@ $(function() {
 
     // ------- edit item -------
     // ******* @ToDo add edit for storage
-    function editItem(){
-        that = $(this);
+    function editItem() {
+        logger.debug('\t--> editItem', this);
 
-        if(that.hasClass('open')){
-            that.animate({
+        var $listItem,
+            animation,
+            duration;
+
+        $listItem = $(this);
+        duration  = 600;
+
+        if($listItem.hasClass('open')) {
+            animation = {
                 height: '-=200'
-            }, 600, function(){});
-        }  else  {
-         that.animate({
-                height: '+=200'
-            }, 600, function(){});   
+            };
         }
-          that.toggleClass('open'); 
+        else {
+            animation = {
+                height: '+=200'
+            };
+        }
+
+        $listItem
+            .animate(animation, duration)
+            .toggleClass('open');
     }
 
     // ------- delete item -------
@@ -127,12 +123,72 @@ $(function() {
     }
 
 
-    // ------- bind THIS SHIT! <3 ------- 
-    item.hammer().on('tap', toggleItem);
-    item.hammer().on('hold', editItem);
+    function initBindings() {
+        logger.debug('\t --> initBindings');
+
+        // ------- bind THIS SHIT! <3 ------- 
+        $item.hammer().on('tap', toggleItem);
+        $item.hammer().on('hold', editItem);
+        $btn.bind('click', toggleMenu);
+
+        // ******* @ToDo add dragright / dragleft event for mobiel
+
+        hammertime.on("swipeleft", function(ev) {
+          changeStage('right');
+        });
+
+        hammertime.on("swiperight ", function(ev) {
+            changeStage('left');
+        });
+
+        Hammer(logo).on('tap',function(){
+            if($eatery.hasClass('hide')){
+                $eatery.fadeIn(500);
+            } else {
+                $eatery.fadeOut(500);
+            }
+        });
+    }
 
 
+    function initGlobals() {
+        logger.debug('\t --> initGlobals');
 
+        hoodie     = new Hoodie();
+        $btn       = $('#menu');
+        $menu      = $('menu ul');
+        $logo      = $('#logo');
+        $eatery    = $('#eatery');
+        $stage     = $('#wrap');
+        $item      = $('.stage ul li');
+        hammertime = $stage.hammer();
+    }
+
+    function initLogger() {
+        logger = {
+            debug: function() {
+                var args;
+
+                if(environment === ENV_DEV) {
+                    args = Array.prototype.slice.call(arguments, 0);
+                    console.log.apply(console, args);
+                }
+            }
+        };
+    }
+
+
+    function startApp() {
+        environment = ENV_DEV;
+        initLogger();
+
+        logger.debug('Starting eatThere');
+        initGlobals();
+        initBindings();
+    }
+
+
+    startApp();
 
 });
 
