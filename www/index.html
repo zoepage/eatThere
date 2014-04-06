@@ -15,20 +15,72 @@
         <link rel="apple-touch-icon-precomposed" href="assets/img/apple-touch-icon.png" />
 
         <link href='http://fonts.googleapis.com/css?family=Roboto:300, 400' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/main.css">
         
         <title>eatHoodie</title>
 
     </head>
     <body class="stageOn">
-        <div id="wrap">       
+         <div class="hoodie-accountbar">
+
+              <div class="hoodie-account-signedout">
+                <span class="btn-group">
+                  <button class="btn btn-small btn-inverse" data-hoodie-action="signup">Sign Up</button>
+                  <button class="btn btn-small dropdown-toggle btn-inverse" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="#" data-hoodie-action="signin">Sign In</a></li>
+                    <li><a href="#" data-hoodie-action="resetpassword">Reset Password</a></li>
+                    <li><a href="#" data-hoodie-action="destroy">Clear local data</a></li>
+                  </ul>
+                </span>
+              </div><!-- /.hoodie-account-signedout -->
+
+              <div class="hoodie-account-signedin">
+                Hello,
+                <span class="hoodie-username"><!-- usern name will be filled in here --></span>
+                <span class="btn-group">
+                  <button class="btn btn-small btn-inverse" data-hoodie-action="signout">Sign Out</button>
+                  <button class="btn btn-small dropdown-toggle btn-inverse" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="#" data-hoodie-action="changepassword">Change Password</a></li>
+                    <li><a href="#" data-hoodie-action="changeusername">Change Username</a></li>
+                    <li><a href="#" data-hoodie-action="destroy">Destroy Account</a></li>
+                  </ul>
+                </span>
+              </div><!-- /.hoodie-account-signedin -->
+
+              <div class="hoodie-account-error">
+                Hello,
+                <span class="hoodie-username"><!-- usern name will be filled in here --></span>.
+                <span class="btn-group">
+                  <button class="btn btn-small btn-danger" data-hoodie-action="signin">Authentication error: Sign in again</button>
+                  <button class="btn btn-small dropdown-toggle btn-danger" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="#" data-hoodie-action="signout">Sign out</a></li>
+                  </ul>
+                </span>
+              </div><!-- /.hoodie-account-error -->
+            </div>
+            <!-- END hoodie-accountbar -->
+            </div> 
+        <div id="wrap">   
+
             <menu>
-                <button id="menu" class="btn up" />
+                <button id="menu" class="btn_m up" />
                 <ul class="hide">    
                     <li><a href="mailto:o.gasidlo@gmail.com?subject=Bugreport eat.There" title="send bugreport">bugreport</a></li>
                     <li><a href="https://www.gittip.com/zoepage/" target="_blank" title="donate">GITTIP</a></li>
                 </ul>
             </menu>
+
+           
 
             <div id="stagePerson" class="stage">
                 <div id="peopleView" class="list">
@@ -45,8 +97,8 @@
             <div id="stageMain" class="stage active">
                  <div id="eatery" class="list hide">
                     <span class="title">Currybox</span><br />
-                    <span class="str">Boxhagenerstr. 129</span><br />
-                    <span class="ort">11245 Berlin</span>
+             <!--   <span class="str">Boxhagenerstr. 129</span><br />
+                    <span class="ort">11245 Berlin</span> -->
                 </div>
                 <div id="logo"></div>
             </div>
@@ -80,7 +132,7 @@
         <script src="/_api/_files/hoodie.js"></script>
 
         <script src="assets/vendor/hoodie.accountbar.bootstrap.js"></script>
-    <!--    <script src="assets/vendor/bootstrap.modalform.js"></script> -->
+        <script src="assets/vendor/bootstrap.modalform.js"></script>
         <script src="assets/js/main.js"></script>
     </body>
 </html>

@@ -66,11 +66,23 @@ html, body {
 
 
     menu {
+        margin-top: 30px;
         height: 40px;
         padding: 0 10px;
         z-index: 500;
         position: relative;
     }
+
+    .hoodie-accountbar {
+        position: absolute;
+        margin-top: 10px; 
+        z-index: 999;
+        right: 20px;
+    }
+        .hoodie-accountbar div,
+        .hoodie-accountbar div span {
+            color: #fff;
+        }
 
         button,
         button:active, 
@@ -79,7 +91,7 @@ html, body {
             border: 0 none;
         }
         
-        .btn {
+        .btn_m {
             height: 40px;
             width: 40px;  
             background: url(../img/btn.png) no-repeat;
@@ -224,4 +236,18 @@ h2 {
     font-size: 48px;
     margin-top: 0px;
     margin-bottom: 10px;
+}
+
+/* --- Hoodie Sign In / Sign Up / Sign out stylings --- */
+/* hide contents until we know if user is signed in or not */
+body .hoodie-account-signedin,
+body .hoodie-account-signedout,
+body .hoodie-account-error {
+  display: none;
+}
+
+html[data-hoodie-account-status=signedin]  .hoodie-account-signedin,
+html[data-hoodie-account-status=error]     .hoodie-account-error,
+html[data-hoodie-account-status=signedout] .hoodie-account-signedout {
+  display: block;
 }
