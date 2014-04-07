@@ -34,7 +34,7 @@ html, body {
 }
 
         .stageOn .list{
-            background-color: rgba(255,255,255,0.7); 
+           /* background-color: rgba(255,255,255,0.7); */
             padding: 1.2em 0 1.5em;
             margin: 2em;
             text-align: center;
@@ -74,6 +74,8 @@ html, body {
         margin-top: 10px; 
         z-index: 999;
         right: 20px;
+        font-size: 16px;
+        text-transform: uppercase;   
     }
         .hoodie-accountbar div,
         .hoodie-accountbar div span {
@@ -91,7 +93,7 @@ html, body {
             }
 
             .stage ul li{
-                border-bottom:1px solid rgba(45, 45, 45, 0.4);
+                border-bottom:1px solid rgba(255, 255, 255, 0.4);
                 padding: 18px 10px;
             }
 
@@ -161,7 +163,9 @@ a {
 }
 
 span, li {
-    color:#184640;
+  /*  color:#184640; */
+    color: #fff;
+    text-transform: uppercase;;
 }
 
 .str, .ort,

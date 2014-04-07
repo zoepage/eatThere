@@ -133,7 +133,7 @@ $(function() {
         logger.debug('\t--> initBindings');
 
         // @TODO: implement event with hoodie actions
-        // $eateryItem.hammer().on('tap', toggleItem);
+         $eateryItem.hammer().on('tap', toggleItem);
 
         $btn.bind('click', toggleMenu);
 
