@@ -103,12 +103,12 @@ $(function() {
 
         if($listItem.hasClass('open')) {
             animation = {
-                height: '-=200'
+                height: '-=100'
             };
         }
         else {
             animation = {
-                height: '+=200'
+                height: '+=100'
             };
         }
 

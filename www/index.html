@@ -85,7 +85,7 @@
             <div id="stagePerson" class="stage">
                 <div id="peopleView" class="list">
                     <ul>
-                        <li><h2>People</h2></li>
+                        <li data-hoodie-action=""><h2>People</h2></li>
                         <li>Mark</li>
                         <li>Sarah</li>
                         <li>Daniel</li>
@@ -110,7 +110,12 @@
                     <button id="btnNew" class="btn new"></button>
                 -->
                     <ul>
-                        <li data-hoodie-action="addEatery"><h2>Eatery</h2></li>
+                        <li data-hoodie-action="addEatery">
+                            <h2>Eatery</h2>
+                            <form action="" class="hide" data-add="">
+                                <input type="text" data-add-eatery="" value="" placeholder="z.B. Bäcker" />
+                            </form>
+                        </li>
                         <li>Thai</li>
                         <li>Bäcker</li>
                         <li>Currybox</li>

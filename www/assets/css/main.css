@@ -45,7 +45,19 @@ html, body {
         }
 
         
+        li[data-hoodie-action] {
+            background-color: rgba(255, 255, 255, 0.3)  ;
+            -webkit-border-top-left-radius: 6px;
+            -webkit-border-top-right-radius: 6px;
+            -moz-border-radius-topleft: 6px;
+            -moz-border-radius-topright: 6px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
 
+        form[data-add] input {
+            margin-top: 35px;
+        }
 /* -------------------------- submenu & buttons -------------------------- */
         #logo {
             height: 215px;
@@ -88,10 +100,14 @@ html, body {
         }
     a.btn-big {
         margin: 0 5px;
-        border-left: 1px solid #fff;
-        padding-left: 18px;
+        
+       
     }
 
+    .hoodie-account-signedin a.btn-big {
+        border-left: 1px solid #fff;
+         padding-left: 18px;
+    }
 
         .stage ul{
                 overflow: auto;
