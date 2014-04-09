@@ -57,6 +57,8 @@ html, body {
 
         form[data-add] input {
             margin-top: 35px;
+            background: url(../img/enter.png) 195px no-repeat #fff;
+            background-size: 18px;
         }
 /* -------------------------- submenu & buttons -------------------------- */
         #logo {
@@ -100,8 +102,6 @@ html, body {
         }
     a.btn-big {
         margin: 0 5px;
-        
-       
     }
 
     .hoodie-account-signedin a.btn-big {
@@ -118,6 +118,11 @@ html, body {
                 border-bottom:1px solid rgba(255, 255, 255, 0.4);
                 padding: 18px 10px;
             }
+    .dropdown-menu li {
+        font-family: sans-serif;
+        font-size: 13px;
+        font-weight: light;
+    }
 
 /* --------------------- stages -------------------*/
 

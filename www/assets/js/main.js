@@ -116,6 +116,17 @@ $(function() {
             .animate(animation, duration)
             .toggleClass('open');
 
+        // @TODO save in var
+        $('form').toggleClass('hide');
+
+
+         // @TODO save in var and clean up and make it work :D
+        document.getElementById('addEatery').onkeydown = function(e){
+           if(e.keyCode == 13){
+            alert($('addEatery').value);
+              hoodie.store.add('eatery', $('addEatery').value);
+           }
+        };
     }
 
     function handleEateryItemHold(evnt) {
