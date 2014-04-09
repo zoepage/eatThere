@@ -4,6 +4,10 @@
 
 window.hoodie = new Hoodie();
 
+    hoodie.account.on('signout', function (user) {
+       window.location.href = 'login.html';
+    });
+
 $(function() {
 
     var ENV_DEV  = 'dev',
@@ -17,6 +21,7 @@ $(function() {
         $menu,
         $logo,
         $eatery,
+        $addEatery,
         $stage,
         $item,
         hammertime;
@@ -120,13 +125,13 @@ $(function() {
         $('form').toggleClass('hide');
 
 
-         // @TODO save in var and clean up and make it work :D
-        document.getElementById('addEatery').onkeydown = function(e){
-           if(e.keyCode == 13){
-            alert($('addEatery').value);
-              hoodie.store.add('eatery', $('addEatery').value);
+         // @TODO save in var and clean up 
+        $addEatery.keypress(function(e){
+           if(e.which == 13){
+                attributes = {title: e.target.value};
+                hoodie.store.add('eatery', attributes); // insert valid JSON
            }
-        };
+        });
     }
 
     function handleEateryItemHold(evnt) {
@@ -160,13 +165,14 @@ $(function() {
             changeStage('left');
         });
 
-        Hammer(logo).on('tap',function(){
-            if($eatery.hasClass('hide')){
+/*       Hammer(logo).on('tap',function(){
+           if($eatery.hasClass('hide')){
                 $eatery.fadeIn(500);
             } else {
                 $eatery.fadeOut(500);
             }
         });
+*/
     }
 
 
@@ -179,6 +185,7 @@ $(function() {
         $menu      = $('menu ul');
         $logo      = $('#logo');
         $eatery    = $('#eatery');
+        $addEatery    = $('#addEatery');
         $stage     = $('#wrap');
         $item      = $('.stage ul li');
         hammertime = $stage.hammer();
@@ -220,6 +227,8 @@ $(function() {
             }
         });
     }
+
+
 
     // pseudo main
 

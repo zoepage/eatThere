@@ -205,7 +205,11 @@ h2, .title {
     margin-top: 0px;
     margin-bottom: 10px;
     font-family: 'Pacifico', cursive;
-}
+    color: #fff;
+} 
+    .bd {
+        margin: 35px 0 15px 0;
+    }
 
 #eatery .title {
     font-size: 64px;

@@ -3,6 +3,7 @@
   "use strict"; // jshint ;_;
 
   $( function() {
+    
     var modalId = "modal-form-" + parseInt(Math.random() * 1000, 10);
     var $cont = $('<div id="'+modalId+'"></div>');
     $('body').append( $cont );
