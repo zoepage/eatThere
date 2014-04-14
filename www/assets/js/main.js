@@ -4,10 +4,6 @@
 
 window.hoodie = new Hoodie();
 
-    hoodie.account.on('signout', function (user) {
-       window.location.href = 'login.html';
-    });
-
 $(function() {
 
     var ENV_DEV  = 'dev',
@@ -225,6 +221,10 @@ $(function() {
             if(typeof eventHandlers[action] === 'function') {
                 eventHandlers[action](evnt);
             }
+        });
+
+        hoodie.account.on('signout', function (user) {
+            window.location.href = 'login.html';
         });
     }
 

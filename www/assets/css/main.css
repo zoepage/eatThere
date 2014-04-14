@@ -234,3 +234,40 @@ html[data-hoodie-account-status=error]     .hoodie-account-error,
 html[data-hoodie-account-status=signedout] .hoodie-account-signedout {
   display: block;
 }
+
+nav.startscreen {
+    margin: 0 auto;
+    width: 100%;
+
+    -o-transform: rotate(-3deg)  translateX(-10px);
+    -webkit-transform: rotate(-3deg)  translateX(-10px);
+    transform: rotate(-3deg) translateX(-10px);
+
+    font-size: 20px;
+}
+
+nav.startscreen .item {
+    margin: 0 auto 10px auto;
+    padding: 15px 0 0 0;
+    width: 275px;
+    height: 40px;
+
+    color: white;
+    text-align: center;
+}
+
+nav.startscreen .item span {
+    display: inline-block;
+
+    -o-transform: rotate(2deg);
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg) ;
+}
+
+nav.startscreen .item.swipe-left {
+    background: url(../img/arrows.png) 0 -65px no-repeat;
+}
+
+nav.startscreen .item.swipe-right {
+    background: url(../img/arrows.png) top left no-repeat;
+}
