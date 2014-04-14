@@ -19,12 +19,26 @@ html, body {
         overflow: hidden !important;
         position: absolute;
         width: 300%;
-        background: url(../img/bg.png) no-repeat center center fixed;  
+        background: url(../img/bg.png) no-repeat center center fixed;
+
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
         padding: 0;
+    }
+
+    #wrap.people {
+        background-position: 00 0;
+        transition: background-position 0.65s;
+    }
+    #wrap.startscreen {
+        background-position: -100px 0;
+        transition: background-position 0.65s;
+    }
+    #wrap.eatery {
+        background-position: -200px 0;
+        transition: background-position 0.65s;
     }
 
     @media (max-width: 800px) {

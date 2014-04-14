@@ -36,10 +36,47 @@ $(function() {
         menu.toggleClass('hide');
     }
 
+    function animateBackground(direction) {
+        var wrapStates,
+            statePointer,
+            stateClass;
+
+        wrapStates = [
+            'people',
+            'startscreen',
+            'eatery',
+        ];
+
+        stateClass = $('#wrap').attr('class');
+        if(wrapStates.indexOf(stateClass) > -1) {
+            statePointer = wrapStates.indexOf(stateClass);
+        }
+
+        if(direction == 'left') {
+            statePointer--;
+            if(statePointer < 0) {
+                statePointer = 0;
+            }
+        } else if(direction == 'right') {
+            statePointer++;
+            if(statePointer > (wrapStates.length-1)) {
+                statePointer = wrapStates.length - 1;
+            }
+        }
+
+
+        $('#wrap').attr('class', wrapStates[statePointer]);
+    }
+
     function changeStage(direction){
-        var active = $('.active');
-        var dirVar;
-        var act = undefined;
+        var active,
+            dirVar,
+            act;
+
+
+        animateBackground(direction);
+
+        active = $('.active');
 
         if(direction == 'right') {
             dirGo       = '-=100%';
@@ -57,7 +94,7 @@ $(function() {
                 if(active.prev('.stage').hasClass('stage')) {
                     act = active.prev(".stage");
                 } 
-                return act;            
+                return act;
             };
         }
 
@@ -223,9 +260,10 @@ $(function() {
             }
         });
 
-        hoodie.account.on('signout', function (user) {
+        window.hoodie.account.on('signout', function (user) {
             window.location.href = 'login.html';
         });
+
     }
 
 
