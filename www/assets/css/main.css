@@ -19,7 +19,7 @@ html, body {
         overflow: hidden !important;
         position: absolute;
         width: 300%;
-        background: url(../img/bg.png) no-repeat center center fixed;
+        background: url(../img/long-wodden-background.jpg) repeat center center fixed;
 
         -webkit-background-size: cover;
         -moz-background-size: cover;
