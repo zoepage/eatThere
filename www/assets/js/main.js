@@ -269,6 +269,12 @@ $(function() {
             window.location.href = 'login.html';
         });
 
+        window.hoodie.account.on('signin', function (user) {
+            $('html').attr('data-hoodie-account-status', 'signedin');
+            $('.hoodie-accountbar').find('.hoodie-username').text(username).attr('color', 'red');
+            alert('DRIN');
+        });
+
     }
 
 
