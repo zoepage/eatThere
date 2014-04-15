@@ -207,6 +207,14 @@ $(function() {
                 }
             });
         } 
+
+        initIosBindings();
+    }
+
+    function initIosBindings() {
+        $(document).on('touchmove', function(evnt) {
+            evnt.preventDefault();
+        });
     }
 
 
