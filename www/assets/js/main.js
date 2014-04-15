@@ -154,8 +154,8 @@ $(function() {
             .animate(animation, duration)
             .toggleClass('open');
 
-        // @TODO save in var
-        $('form').toggleClass('hide');
+        // @TODO save in var + small bug on first animation
+        $('form').fadeToggle(500);
 
 
          // @TODO save in var and clean up 

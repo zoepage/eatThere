@@ -59,44 +59,11 @@
           $form;
 
       switch(action) {
-        case 'signup':
-          $form = $.modalForm({
-            fields: [ 'username', 'password', 'password_confirmation' ],
-            submit: 'Sign Up'
-          });
-          break;
-        case 'signin':
-          $form = $.modalForm({
-            fields: [ 'username', 'password' ],
-            submit: 'Sign in'
-          });
-          break;
-        case 'resetpassword':
-          $form = $.modalForm({
-            fields: [ 'username' ],
-            submit: 'Reset Password'
-          });
-          break;
-        case 'changepassword':
-          $form = $.modalForm({
-            fields: [ 'current_password', 'new_password' ],
-            submit: 'Reset Password'
-          });
-          break;
-        case 'changeusername':
-          $form = $.modalForm({
-            fields: [ 'current_password', 'new_username' ],
-            submit: 'Reset Password'
-          });
-          break;
+        
         case 'signout':
           window.hoodie.account.signOut();
           break;
-        case 'destroy':
-          if( window.confirm('you sure?') ) {
-            window.hoodie.account.destroy();
-          }
-          break;
+        
       }
 
       if ($form) {
@@ -131,14 +98,7 @@
             break;
         }
 
-        magic.done(function() {
-          $modal.find('.alert').remove();
-          $modal.modal('hide');
-        });
-        magic.fail(function(error) {
-          $modal.find('.alert').remove();
-          $modal.trigger('error', error);
-        });
+
       };
     };
   });
