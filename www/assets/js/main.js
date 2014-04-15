@@ -198,14 +198,15 @@ $(function() {
             changeStage('left');
         });
 
-/*       Hammer(logo).on('tap',function(){
-           if($eatery.hasClass('hide')){
-                $eatery.fadeIn(500);
-            } else {
-                $eatery.fadeOut(500);
-            }
-        });
-*/
+        if($logo != undefined) {
+          Hammer($logo).on('tap',function(){
+               if($eatery.hasClass('hide')){
+                    $eatery.fadeIn(500);
+                } else {
+                    $eatery.fadeOut(500);
+                }
+            });
+        } 
     }
 
 
@@ -261,6 +262,10 @@ $(function() {
         });
 
         window.hoodie.account.on('signout', function (user) {
+            window.location.href = 'login.html';
+        });
+
+        window.hoodie.account.on('unauthenticated', function (user) {
             window.location.href = 'login.html';
         });
 
