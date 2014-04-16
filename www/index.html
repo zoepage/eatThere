@@ -22,10 +22,10 @@
 
     </head>
     <body class="stageOn">
-         <div class="hoodie-accountbar">
 
-<!--              <div class="hoodie-account-signedout">
-
+        <div class="hoodie-accountbar">
+        <!--
+            <div class="hoodie-account-signedout">
                   <a class="btn-big" data-hoodie-action="signup">Sign Up</a>
                   <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
@@ -33,48 +33,52 @@
                   <ul class="dropdown-menu pull-right">
                     <li><a href="#" data-hoodie-action="signin">Sign In</a></li>
                     <li><a href="#" data-hoodie-action="resetpassword">Reset Password</a></li>
-                  <!--  <li><a href="#" data-hoodie-action="destroy">Clear local data</a></li> --><!--
+                    <li><a href="#" data-hoodie-action="destroy">Clear local data</a></li>
                   </ul>
-
-              </div><!-- /.hoodie-account-signedout -->
-
-              <div class="hoodie-account-signedin">
+            </div>
+            /.hoodie-account-signedin -->
+    
+            <div class="hoodie-account-signedin">
                 Hello,
                 <span class="hoodie-username"><!-- usern name will be filled in here --></span>
-               
-                  <a class="btn-big" data-hoodie-action="signout">Sign Out</a>
-    <!--              <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu pull-right">
-                    <li><a href="#" data-hoodie-action="changepassword">Change Password</a></li>
-                    <li><a href="#" data-hoodie-action="changeusername">Change Username</a></li>
-                    <li><a href="#" data-hoodie-action="destroy">Delete Account</a></li>
-                    <li><a href="mailto:o.gasidlo@gmail.com?subject=Bugreport eat.There" title="send bugreport">bugreport</a></li>
-                    <li><a href="https://www.gittip.com/zoepage/" target="_blank" title="donate">GITTIP</a></li>
-                  </ul>
-          -->     
-              </div><!-- /.hoodie-account-signedin -->
+
+                <a class="btn-big" data-hoodie-action="signout">Sign Out</a>
+                <!-- 
+                    <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="#" data-hoodie-action="changepassword">Change Password</a></li>
+                        <li><a href="#" data-hoodie-action="changeusername">Change Username</a></li>
+                        <li><a href="#" data-hoodie-action="destroy">Delete Account</a></li>
+                        <li><a href="mailto:o.gasidlo@gmail.com?subject=Bugreport eat.There" title="send bugreport">bugreport</a></li>
+                        <li><a href="https://www.gittip.com/zoepage/" target="_blank" title="donate">GITTIP</a></li>
+                    </ul>
+                  -->     
+            </div><!-- /.hoodie-account-signedin -->
 
             <div class="hoodie-account-error">
                 Hello,
                 <span class="hoodie-username"><!-- usern name will be filled in here --></span>.
+
                 <span class="btn-group">
-                  <a class="btn-big btn-danger" data-hoodie-action="signin">Authentication error: Sign in again</a>
-<!--                  <button class="btn-big dropdown-toggle btn-danger" data-toggle="dropdown">
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu pull-right">
-                    <li><a href="#" data-hoodie-action="signout">Sign out</a></li>
-                  </ul>
-                </span>-->
-              </div><!-- /.hoodie-account-error -->
-            </div>
-            <!-- END hoodie-accountbar -->
-            </div> 
-            
-        <div id="wrap" class="startscreen">
-<!--
+                    <a class="btn-big btn-danger" data-hoodie-action="signin">Authentication error: Sign in again</a>
+                <!--
+                    <button class="btn-big dropdown-toggle btn-danger" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="#" data-hoodie-action="signout">Sign out</a></li>
+                    </ul>
+                -->
+                </span>
+            </div> <!-- /.hoodie-account-error -->
+        </div> 
+        <!-- END hoodie-accountbar -->
+    
+        <div id="stage">
+            <!--
             <menu>
                 <button id="menu" class="btn_m up" />
                 <ul class="hide">    
@@ -82,59 +86,61 @@
                     <li><a href="https://www.gittip.com/zoepage/" target="_blank" title="donate">GITTIP</a></li>
                 </ul>
             </menu>
+            -->
 
- -->          
-
-            <div id="stagePerson" class="stage">
-                <div id="peopleView" class="list">
-                    <ul>
-                        <li data-hoodie-action=""><h2>People</h2></li>
-                        <li>Mark</li>
-                        <li>Sarah</li>
-                        <li>Daniel</li>
-                        <li>Tim</li>
-                        <li>John</li>
-                    </ul>
+            <div id="views-wrapper">
+                <div id="people-view" class="view">
+                    <div id="people" class="list">
+                        <ul>
+                            <li data-hoodie-action=""><h2>People</h2></li>
+                            <li>Mark</li>
+                            <li>Sarah</li>
+                            <li>Daniel</li>
+                            <li>Tim</li>
+                            <li>John</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div id="stageMain" class="stage active">
-                 <div id="eatery" class="list hide">
-                    <span class="title">Currybox</span><br />
-            <!--    <span class="str">Boxhagenerstr. 129</span><br />
-                    <span class="ort">11245 Berlin</span> -->
-                </div>
-                <div id="logo"></div>
 
-                <nav class="startscreen">
-                    <div class="item swipe-right"><span>Eateries</span></div>
-                    <div class="item swipe-left"><span>People</span></div>
-                </nav>
-            </div>
-            <div id="stageList" class="stage">
-                <div id="eateryView" class="list">
-                    
+                <div id="main-view" class="view active">
+                    <div id="eatery" class="list hide">
+                        <span class="title">Currybox</span><br />
+                        <!--    <span class="str">Boxhagenerstr. 129</span><br />
+                        <span class="ort">11245 Berlin</span> -->
+                    </div>
+                    <div id="logo"></div>
+
+                    <nav class="startscreen">
+                        <div class="item swipe-right"><span>Eateries</span></div>
+                        <div class="item swipe-left"><span>People</span></div>
+                    </nav>
+                </div>
+
+                <div id="eatery-view" class="view">
+                    <div id="eateries" class="list">
+                        
                     <!--
-                    <input type="text" id="addEateryValue" value="" class="hide" />
-                    <button id="btnNew" class="btn new"></button>
-                -->
-                    <ul>
-                        <li data-hoodie-action="addEatery">
-                            <h2>Eatery</h2>
-                            <form action="" class="hide" data-add="">
-                                <input id="addEatery" type="text" data-add-eatery="" value="" placeholder="z.B. Bäcker" autofocus />
-                            </form>
-                        </li>
-                        <li>Thai</li>
-                        <li>Bäcker</li>
-                        <li>Currybox</li>
-                        <li>Happy Happy Ding Dong</li>
-                        <li>Boomerang</li>
-                    </ul>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- @ToDo: add touch-lib -> swipe r/l & switch inbetween stages -->
+                        <input type="text" id="addEateryValue" value="" class="hide" />
+                        <button id="btnNew" class="btn new"></button>
+                    -->
+                        <ul>
+                            <li data-hoodie-action="addEatery">
+                                <h2>Eatery</h2>
+                                <form action="" class="hide" data-add="">
+                                    <input id="addEatery" type="text" data-add-eatery="" value="" placeholder="z.B. Bäcker" autofocus />
+                                </form>
+                            </li>
+                            <li>Thai</li>
+                            <li>Bäcker</li>
+                            <li>Currybox</li>
+                            <li>Happy Happy Ding Dong</li>
+                            <li>Boomerang</li>
+                        </ul>
+                        </ul>
+                    </div>
+                </div> <!-- #stageList -->
+            </div><!-- #views-wrapper -->
+    </div> <!-- #stage -->
 
 
         <script src="assets/vendor/jquery-2.1.0.min.js"></script>

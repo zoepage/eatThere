@@ -12,103 +12,134 @@ html, body {
     width: 100%;
 }
 
-    #wrap {
-        min-height: 100%;
-        height:auto !important;
-        height:100%;
-        overflow: hidden !important;
-        position: absolute;
-        width: 300%;
-        background: url(../img/long-wodden-background.jpg) repeat center center fixed;
+/* --------------------- Stage Definitions -------------------*/
 
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        padding: 0;
-    }
+#stage {
+    overflow: hidden;
+    position: absolute;
 
-    #wrap.people {
-        background-position: 00 0;
-        transition: background-position 0.65s;
-    }
-    #wrap.startscreen {
-        background-position: -100px 0;
-        transition: background-position 0.65s;
-    }
-    #wrap.eatery {
-        background-position: -200px 0;
-        transition: background-position 0.65s;
-    }
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    top: 0;
+    left: 0;
 
-    @media (max-width: 800px) {
-        #wrap {
-        width:100%;
-    }
+    padding: 0;
+
+    background: url(../img/long-wodden-background.jpg) repeat center center fixed;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    transition: background-position 0.4s ease-out;
 }
 
-        .stageOn .list{
-           /* background-color: rgba(255,255,255,0.7); */
-            padding: 1.2em 0 1.5em;
-            margin: 2em;
-            text-align: center;
-            font-size: 1.6em;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            border-radius: 4px;
-        }
+#stage.people-view {
+    background-position: 0 0;
+}
 
-        
-        li[data-hoodie-action] {
-            background-color: rgba(255, 255, 255, 0.3)  ;
-            -webkit-border-top-left-radius: 6px;
-            -webkit-border-top-right-radius: 6px;
-            -moz-border-radius-topleft: 6px;
-            -moz-border-radius-topright: 6px;
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;
-        }
+#stage.main-view {
+    background-position: 50% 0;
+}
 
-        form[data-add] input {
-            margin-top: 35px;
-            background: url(../img/enter.png) 195px no-repeat #fff;
-            background-size: 18px;
-        }
+#stage.eatery-view {
+    background-position: 100% 0;
+}
+
+/* --------------------- General Views Definitions -------------------*/
+
+#views-wrapper {
+    position: relative;
+    height: 100%;
+    transition: left 0.3s ease-out;
+}
+
+.view {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    z-index: 400;
+
+    width: 100%;
+
+    -o-transition: left 1s;
+    -webkit-transform: left 1s;
+    transform: left 1s;
+}
+
+.view .list{
+    padding: 1.2em 0 1.5em;
+    margin: 2em;
+
+    text-align: center;
+    font-size: 1.6em;
+
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+li[data-hoodie-action] {
+    background-color: rgba(255, 255, 255, 0.3);
+
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+form[data-add] input {
+    margin-top: 35px;
+
+    background: url(../img/enter.png) 195px no-repeat #fff;
+    background-size: 18px;
+}
+
 /* -------------------------- submenu & buttons -------------------------- */
-        #logo {
-            height: 215px;
-            width: 200px;
-            background: url(../img/logo.png) no-repeat;
-            margin: 15% auto;
-            cursor: pointer;
-        }
 
-        .stageOn #logo {
-            margin-top: 10%;
-        }
+#logo {
+    cursor: pointer;
 
-        .stageOn #logo.output {
-            margin-top: 0%;
-        }
+    height: 215px;
+    width: 200px;
+    margin: 15% auto;
 
-    ul {
-        list-style: none;
-        margin: 0;
-    }
+    background: url(../img/logo.png) no-repeat;
+}
 
+#logo {
+    margin-top: 10%;
+}
 
-    .hoodie-accountbar {
-        position: absolute;
-        margin-top: 10px; 
-        z-index: 999;
-        right: 20px;
-        font-size: 16px;
-        text-transform: uppercase;   
-    }
-        .hoodie-accountbar div,
-        .hoodie-accountbar div span {
-            color: #fff;
-        }
+#logo.output {
+    margin-top: 0%;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+}
+
+.hoodie-accountbar {
+    position: absolute;
+
+    margin-top: 10px;
+    right: 20px;
+    z-index: 999;
+
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.hoodie-accountbar div,
+.hoodie-accountbar div span {
+    color: #fff;
+}
 
         .hoodie-accountbar .hoodie-username {
             display: inline-block;
@@ -123,12 +154,12 @@ html, body {
          padding-left: 18px;
     }
 
-        .stage ul{
+        .view ul{
                 overflow: auto;
                 height: 310px;
             }
 
-            .stage ul li{
+            .view ul li{
                 border-bottom:1px solid rgba(255, 255, 255, 0.4);
                 padding: 18px 10px;
             }
@@ -138,36 +169,11 @@ html, body {
         font-weight: light;
     }
 
-/* --------------------- stages -------------------*/
-
-.stage {
-    width:33%;
-    position: absolute;
-    z-index: 400;   
-    top: 60px; 
-}
-
-@media (max-width: 800px) {
-  .stage {
-    width:100%;
-    }
-}
-
-#stagePerson {
-    left: -100% ;
-}
-
-#stageList {
-    right: -100%;
-}
-
-
-
 
 /* -------------- helper -------------- */
 
 
-.hide{
+.hide {
     display: none;
 }
 
@@ -248,6 +254,8 @@ html[data-hoodie-account-status=error]     .hoodie-account-error,
 html[data-hoodie-account-status=signedout] .hoodie-account-signedout {
   display: block;
 }
+
+/* Startscreen Arrow Legend */
 
 nav.startscreen {
     margin: 0 auto;
