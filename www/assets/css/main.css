@@ -234,6 +234,7 @@ h2, .title {
 #eatery .title {
     font-size: 64px;
     margin-bottom: 64px;
+    line-height: 1.22em;
 }
 
 #eatery span {

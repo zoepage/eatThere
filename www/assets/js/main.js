@@ -11,12 +11,13 @@ $(function() {
 
     var environment,
         logger,
-        hoodie,
-        $stage,
         views,
         viewOrder,
         startingViewName,
         currentViewName,
+        people,
+        eateries,
+        $stage,
         $eateryItem,
         $btn,
         $menu,
@@ -24,7 +25,8 @@ $(function() {
         $eatery,
         $addEatery,
         $item,
-        hammertime;
+        $hammertime,
+        hoodie;
 
     // init globals
     
@@ -40,7 +42,7 @@ $(function() {
     $eatery       = $('#eatery');
     $addEatery    = $('#addEatery');
     $item         = $('.stage ul li');
-    hammertime    = $stage.hammer();
+    $hammertime   = $stage.hammer();
 
     // view/ui configuration
     
@@ -68,14 +70,14 @@ $(function() {
         index = viewOrder.indexOf(viewName);
 
         if(viewName != undefined && index > -1) {
-            var css = {
+            var css;
+
+            css = {
                 left:( ( -100 * index) + '%')
             };
 
             $viewsWrapper.css(css);
             $stage.attr('class', viewName);
-
-            logger.debug('show ', viewName);
         }
     }
 
@@ -120,6 +122,51 @@ $(function() {
             currentViewName = viewOrder[nextIndex];
             showView(currentViewName);
         }
+    }
+
+    function fetchRandomEatery() {
+        return eateries[Math.round(Math.random() * 9999999) % eateries.length];
+    }
+
+    function renderListData() {
+        var $eateryList,
+            $peopleList,
+            $listNode;
+
+        $eateryList = $eateryItems.parent();
+        $peopleList = $peopleItems.parent();
+        $listNode   = $('<li>');
+
+
+        people.forEach(function(person, idx, people) {
+            $peopleList.append(
+                $listNode.clone().html(person)
+            );
+        });
+
+        eateries.forEach(function(eatery, idx, eateries) {
+            $eateryList.append(
+                $listNode.clone().html(eatery)
+            );
+        });
+
+    }
+
+    /* Sort Helper */
+
+    function orderStringsAscending(a, b) {
+        var result;
+        result = 0;
+
+        if(a < b) {
+            // a goes up
+            result = -1;
+        } else if(a > b) {
+            // a goes down
+            result = 1;
+        }
+
+        return result;
     }
 
 
@@ -199,6 +246,25 @@ $(function() {
         swipeRight();
     }
 
+    function handleLogoTap(evnt) {
+        var randomEatery;
+
+        randomEatery = fetchRandomEatery();
+
+        function fadeIn() {
+            $eatery.find('.title').html(randomEatery);
+            $eatery.fadeIn(500, function() {
+                $(this).removeClass('hide');
+            });
+        }
+
+        if($eatery.hasClass('hide')){
+            fadeIn();
+        } else {
+            $eatery.fadeOut(250, fadeIn);
+        }
+    }
+
     // ------- delete item -------
     // ******* @ToDo add delete of item in storage
     function deleteItem(){
@@ -223,23 +289,12 @@ $(function() {
         logger.debug('\t--> initBindings');
 
         // @TODO: implement event with hoodie actions
-         $eateryItems.hammer().on('tap', toggleItem);
-
+        $eateryItems.hammer().on('tap', toggleItem);
         $btn.bind('click', toggleMenu);
+        $hammertime.on("swipeleft",  handleStageSwipeLeft);
+        $hammertime.on("swiperight", handleStageSwipeRight);
 
-        // ******* @ToDo add dragright / dragleft event for mobiel
-        hammertime.on("swipeleft",  handleStageSwipeLeft);
-        hammertime.on("swiperight", handleStageSwipeRight);
-
-        if($logo != undefined) {
-          Hammer($logo).on('tap',function(){
-               if($eatery.hasClass('hide')){
-                    $eatery.fadeIn(500);
-                } else {
-                    $eatery.fadeOut(500);
-                }
-            });
-        } 
+        Hammer($logo).on('tap', handleLogoTap);
 
         initMobileBindings();
     }
@@ -247,6 +302,7 @@ $(function() {
     function initMobileBindings() {
         logger.debug('\t--> initMobileBindings');
 
+        // prevent ios webkit overscroll-effekt
         $(document).on('touchmove', function(evnt) {
             evnt.preventDefault();
         });
@@ -282,7 +338,28 @@ $(function() {
         });
 
         currentViewName = startingViewName;
+        renderListData();
         showView(currentViewName);
+    }
+
+    function initData() {
+
+        people = [
+            'Mark',
+            'Sarah',
+            'Daniel',
+            'Tim'
+        ];
+
+        eateries = [
+            'Thai',
+            'Bäcker',
+            'Currybox',
+            'Happy Happy Ding Dong'
+        ];
+
+        people.sort(orderStringsAscending);
+        eateries.sort(orderStringsAscending);
     }
 
     function startApp() {
@@ -291,6 +368,7 @@ $(function() {
 
         logger.debug('Starting eatThere');
 
+        initData();
         initUi();
         initBindings();
         initHoodieBindings();
