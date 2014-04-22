@@ -14,6 +14,8 @@ window.eatThere = window.eatThere || {};
     EateryListViewController.prototype = window.eatThere.mix(
         window.eatThere._BaseViewController,
         {
+            // overridden _BaseViewController methods
+
             fetchData: function fetchData(done) {
                 var that = this;
 
@@ -29,7 +31,7 @@ window.eatThere = window.eatThere || {};
                         ]
                     });
                 }, 1);
-            }
+            },
         }
     );
 

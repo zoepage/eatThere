@@ -94,9 +94,9 @@
                     <script class="template" type="x-tmpl-mustache">
                         <div id="people" class="list">
                             <ul>
-                                <li data-hoodie-action=""><h2>People</h2></li>
+                                <li><h2>People</h2></li>
                                 {{#people}}
-                                    <li>{{name}}</li>
+                                    <li data-id="{{id}}">{{name}}</li>
                                 {{/people}}
                             </ul>
                         </div>
