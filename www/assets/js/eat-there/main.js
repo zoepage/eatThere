@@ -1,8 +1,7 @@
-/** ---------------------------------------------------------------------- */
-/* @autor: Ola Gasidlo (o.gasidlo@gmail.com)
-/* ----------------------------------------------------------------------- */
+'use strict';
 
-window.hoodie = new Hoodie();
+window.hoodie   = new Hoodie();
+window.eatThere = window.eatThere || {};
 
 $(function() {
 
@@ -18,7 +17,10 @@ $(function() {
         people,
         eateries,
         $stage,
+        $viewsWrapper,
         $eateryItem,
+        $eateryItems,
+        $peopleItems,
         $btn,
         $menu,
         $logo,
@@ -47,18 +49,18 @@ $(function() {
     // view/ui configuration
     
     views = {
-        'people-view': $('#people-view'),
-        'main-view':   $('#main-view'),
-        'eatery-view': $('#eatery-view')
+        'people-view': new window.eatThere.PeopleListViewController(),
+        'main-view':   new window.eatThere.StartscreenViewController(),
+        'eatery-view': new window.eatThere.EateryListViewController(),
     };
 
     viewOrder = [
         'people-view',
         'main-view',
-        'eatery-view'
+        'eatery-view',
     ];
 
-    startingViewName = 'main-view';
+    startingViewName = 'people-view';
 
     /* Helpers */
 
@@ -137,18 +139,17 @@ $(function() {
         $peopleList = $peopleItems.parent();
         $listNode   = $('<li>');
 
+        // people.forEach(function(person, idx, people) {
+        //     $peopleList.append(
+        //         $listNode.clone().html(person)
+        //     );
+        // });
 
-        people.forEach(function(person, idx, people) {
-            $peopleList.append(
-                $listNode.clone().html(person)
-            );
-        });
-
-        eateries.forEach(function(eatery, idx, eateries) {
-            $eateryList.append(
-                $listNode.clone().html(eatery)
-            );
-        });
+        // eateries.forEach(function(eatery, idx, eateries) {
+        //     $eateryList.append(
+        //         $listNode.clone().html(eatery)
+        //     );
+        // });
 
     }
 
@@ -273,7 +274,7 @@ $(function() {
 
     // setup routines
     function initLogger() {
-        logger = {
+        window.eatThere.logger = {
             debug: function() {
                 var args;
 
@@ -283,6 +284,8 @@ $(function() {
                 }
             }
         };
+
+        logger = window.eatThere.logger;
     }
 
     function initBindings() {
@@ -332,34 +335,31 @@ $(function() {
         var cssConfig;
 
         viewOrder.forEach(function(viewName, idx, viewNames) {
-            views[viewName].css({
+            var view = views[viewName];
+
+            view.setCss({
                 left:((100 * idx) + '%')
-            })
+            });
+
+            view.update();
         });
 
         currentViewName = startingViewName;
-        renderListData();
+        // renderListData();
         showView(currentViewName);
     }
 
     function initData() {
 
-        people = [
-            'Mark',
-            'Sarah',
-            'Daniel',
-            'Tim'
-        ];
+        // eateries = [
+        //     'Thai',
+        //     'Bäcker',
+        //     'Currybox',
+        //     'Happy Happy Ding Dong'
+        // ];
 
-        eateries = [
-            'Thai',
-            'Bäcker',
-            'Currybox',
-            'Happy Happy Ding Dong'
-        ];
-
-        people.sort(orderStringsAscending);
-        eateries.sort(orderStringsAscending);
+        // people.sort(orderStringsAscending);
+        // eateries.sort(orderStringsAscending);
     }
 
     function startApp() {

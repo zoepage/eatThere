@@ -89,59 +89,73 @@
             -->
 
             <div id="views-wrapper">
-                <div id="people-view" class="view">
-                    <div id="people" class="list">
-                        <ul>
-                            <li data-hoodie-action=""><h2>People</h2></li>
-                        </ul>
-                    </div>
+
+                <div id="people-view" class="view" data-view="people">
+                    <script class="template" type="x-tmpl-mustache">
+                        <div id="people" class="list">
+                            <ul>
+                                <li data-hoodie-action=""><h2>People</h2></li>
+                                {{#people}}
+                                    <li>{{name}}</li>
+                                {{/people}}
+                            </ul>
+                        </div>
+                    </script>
                 </div>
 
-                <div id="main-view" class="view active">
-                    <div id="eatery" class="list hide">
-                        <span class="title">Currybox</span><br />
-                        <!--    <span class="str">Boxhagenerstr. 129</span><br />
-                        <span class="ort">11245 Berlin</span> -->
-                    </div>
-                    <div id="logo"></div>
+                <div id="main-view" class="view active" data-view="startscreen">
+                    <script class="template" type="x-tmpl-mustache">
+                        <div id="eatery" class="list hide">
+                            <span class="title">Currybox</span><br />
+                        </div>
+                        <div id="logo"></div>
 
-                    <nav class="startscreen">
-                        <div class="item swipe-right"><span>Eateries</span></div>
-                        <div class="item swipe-left"><span>People</span></div>
-                    </nav>
+                        <nav class="startscreen">
+                            <div class="item swipe-right"><span>Eateries</span></div>
+                            <div class="item swipe-left"><span>People</span></div>
+                        </nav>
+                    </script>
                 </div>
 
-                <div id="eatery-view" class="view">
-                    <div id="eateries" class="list">
-                        
-                    <!--
-                        <input type="text" id="addEateryValue" value="" class="hide" />
-                        <button id="btnNew" class="btn new"></button>
-                    -->
-                        <ul>
-                            <li data-hoodie-action="addEatery">
-                                <h2>Eateries</h2>
-                                <form action="" class="hide" data-add="">
-                                    <input id="addEatery" type="text" data-add-eatery="" value="" placeholder="z.B. Bäcker" autofocus />
-                                </form>
-                            </li>
-                        </ul>
-                        </ul>
-                    </div>
-                </div> <!-- #stageList -->
+                <div id="eatery-view" class="view" data-view="eateries">
+                    <script class="template" type="x-tmpl-mustache">
+                            <div id="eateries" class="list">
+                            <ul>
+                                <li data-hoodie-action="addEatery">
+                                    <h2>Eateries</h2>
+                                    <form action="" class="hide" data-add="">
+                                        <input id="addEatery" type="text" data-add-eatery="" value="" placeholder="z.B. Bäcker" autofocus />
+                                    </form>
+                                </li>
+                                {{#eateries}}
+                                    <li>{{name}}</li>
+                                {{/eateries}}
+                            </ul>
+                        </div>
+                    </script>
+                </div>
+
             </div><!-- #views-wrapper -->
-    </div> <!-- #stage -->
+        </div> <!-- #stage -->
 
 
         <script src="assets/vendor/jquery-2.1.0.min.js"></script>
         <script src="assets/vendor/jquery-hammer-min.js"></script>
         <script src="assets/vendor/bootstrap/bootstrap.js"></script>
+        <script src="assets/vendor/mustache.js"></script>
 
         <!-- Load the dynamic version of hoodie.js that includes all the plugin code-->
         <script src="/_api/_files/hoodie.js"></script>
+        
+        <script src="assets/js/eat-there/helpers.js"></script>
+        <script src="assets/js/eat-there/view-controller/_base.js"></script>
+        <script src="assets/js/eat-there/view-controller/eatery-list.js"></script>
+        <script src="assets/js/eat-there/view-controller/people-list.js"></script>
+        <script src="assets/js/eat-there/view-controller/startscreen.js"></script>
+        <script src="assets/js/eat-there/main.js"></script>
 
         <script src="assets/vendor/hoodie.accountbar.bootstrap.js"></script>
         <script src="assets/vendor/hoodie.accountbar.js"></script>
-        <script src="assets/js/main.js"></script>
+
     </body>
 </html>
