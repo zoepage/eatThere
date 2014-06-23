@@ -24,17 +24,21 @@ window.eatThere = window.eatThere || {};
             this.viewNode.css(config);
         },
 
-        fetchData: function(done) {
+        fetchData: function fetchData() {
             var that,
+                deferred;
 
-            that = this; 
+            that     = this;
+            deferred = jQuery.Deferred();
 
             // TODO: feed with real data
             setTimeout(function() {
-                done({
+                deferred.resolve({
                     viewName: this.viewName
-                });
+                })
             }, 1);
+
+            return deferred.promise();
         },
 
         render: function render() {
@@ -48,10 +52,11 @@ window.eatThere = window.eatThere || {};
         update: function update() {
             var that = this;
 
-            this.fetchData(function(data) {
-                that.viewData = data;
-                that.render();
-            })
+            this.fetchData()
+                .then(function(data) {
+                    that.viewData = data;
+                    that.render();
+                });
         }
     };
 

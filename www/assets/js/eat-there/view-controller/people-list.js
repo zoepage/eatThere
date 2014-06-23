@@ -19,22 +19,25 @@ window.eatThere = window.eatThere || {};
             // overridden _BaseViewController methods
             
             fetchData: function fetchData(done) {
-                var that = this;
+                var that     = this,
+                    deferred = jQuery.Deferred();
 
                 this.peopleStore
                     .findAll()
                     .then(function(people) {
-                        
+
                         people = people.sort(function(a, b) {
                             return a.name > b.name;
                         });
 
-                        done({
+                        deferred.resolve({
                             viewName: that.viewName,
                             people:people
                         });
-                    })
-                var that = this;
+                    });
+                
+
+                return deferred.promise();
             },
 
             initBindings: function() {

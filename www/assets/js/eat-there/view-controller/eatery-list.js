@@ -17,11 +17,12 @@ window.eatThere = window.eatThere || {};
             // overridden _BaseViewController methods
 
             fetchData: function fetchData(done) {
-                var that = this;
+                var that     = this,
+                    deferred = jQuery.Deferred();
 
                 // TODO: feed with real data
                 setTimeout(function() {
-                    done({
+                    deferred.resolve({
                         viewName: that.viewName,
                         eateries:[
                             {name: 'McDonalds'},
@@ -31,6 +32,8 @@ window.eatThere = window.eatThere || {};
                         ]
                     });
                 }, 1);
+
+                return deferred.promise();
             },
         }
     );
