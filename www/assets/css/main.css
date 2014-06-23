@@ -299,3 +299,9 @@ nav.startscreen .item.swipe-left {
 nav.startscreen .item.swipe-right {
     background: url(../img/arrows.png) top left no-repeat;
 }
+
+/* People View */
+
+#people-view .person-name {
+    text-align: center;
+}

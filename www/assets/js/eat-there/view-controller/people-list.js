@@ -10,6 +10,7 @@ window.eatThere = window.eatThere || {};
 
     function PeopleListViewController() {
         this.init('people');
+        this.peopleStore = hoodie.store('people');
     }
 
     PeopleListViewController.prototype = window.eatThere.mix(
@@ -19,19 +20,21 @@ window.eatThere = window.eatThere || {};
             
             fetchData: function fetchData(done) {
                 var that = this;
-                
-                // TODO: feed with real data
-                setTimeout(function() {
-                    done({
-                        viewName: that.viewName,
-                        people:[
-                            {id: 11, name: 'Donna'},
-                            {id: 22, name: 'Steven'},
-                            {id: 33, name: 'Aaron'},
-                            {id: 44, name: 'Frederick'}
-                        ]
-                    });
-                }, 1);
+
+                this.peopleStore
+                    .findAll()
+                    .then(function(people) {
+                        
+                        people = people.sort(function(a, b) {
+                            return a.name > b.name;
+                        });
+
+                        done({
+                            viewName: that.viewName,
+                            people:people
+                        });
+                    })
+                var that = this;
             },
 
             initBindings: function() {
@@ -40,6 +43,29 @@ window.eatThere = window.eatThere || {};
                 this.viewNode.find('li').click(function(evnt) {
                     that.handlePeopleItemClicked(evnt);
                 });
+
+                this.viewNode.find('[data-js="create-person"]').keyup(function(evnt) {
+                    var personName;
+
+                    // on enter pressed
+                    if(evnt.keyCode == 13) {
+                        personName = $(evnt.target).val();
+
+                        $(evnt.target).val(undefined);
+                        console.log('YAYA!', evnt.target);
+                        that.createPerson(personName);
+                    }
+                });
+
+                hoodie.store.on('add:people', function() {
+                    that.update();
+                });
+            },
+
+            // helpers
+            
+            createPerson: function(personName) {
+                this.peopleStore.add({name: personName});
             },
 
             // event handlers
