@@ -4,13 +4,23 @@ window.eatThere = window.eatThere || {};
 
 (function() {
 
-    var Promise = window.eatThere.Promise;
+    var ViewHelper = {
+        getPersonDecrator: function(person) {
+            var clazzes = ['person'];
+
+            if(person.isInvolved === true) {
+                clazzes.push('involved');
+            }
+
+            return clazzes.join(' ');
+        },
+    };
 
     window.eatThere.PeopleListViewController = PeopleListViewController;
 
     function PeopleListViewController() {
         this.init('people');
-        this.peopleStore = hoodie.store('people');
+        this.initOnce();
     }
 
     PeopleListViewController.prototype = window.eatThere.mix(
@@ -18,26 +28,19 @@ window.eatThere = window.eatThere || {};
         {
             // overridden _BaseViewController methods
             
-            fetchData: function fetchData(done) {
-                var that     = this,
-                    deferred = jQuery.Deferred();
+            initOnce: function initOnce() {
+                var that = this;
 
-                this.peopleStore
-                    .findAll()
-                    .then(function(people) {
+                this.peopleStore = hoodie.store('people');
+                this.initOnce    = false;
 
-                        people = people.sort(function(a, b) {
-                            return a.name > b.name;
-                        });
+                hoodie.store.on('people:add', function(addedPerson) {
+                    that.update();
+                });
 
-                        deferred.resolve({
-                            viewName: that.viewName,
-                            people:people
-                        });
-                    });
-                
-
-                return deferred.promise();
+                hoodie.store.on('people:update', function(updatedPerson) {
+                    that.update();
+                });
             },
 
             initBindings: function() {
@@ -55,20 +58,51 @@ window.eatThere = window.eatThere || {};
                         personName = $(evnt.target).val();
 
                         $(evnt.target).val(undefined);
-                        console.log('YAYA!', evnt.target);
                         that.createPerson(personName);
                     }
                 });
+            },
 
-                hoodie.store.on('add:people', function() {
-                    that.update();
-                });
+            fetchData: function fetchData(done) {
+                var that     = this,
+                    deferred = jQuery.Deferred();
+
+                this.peopleStore
+                    .findAll()
+                    .then(function(people) {
+
+                        // @TODO create a more fancy model
+                        people.forEach(function(person) {
+                            Object.defineProperty(person, 'states', {
+                                get: function() {
+                                    return ViewHelper.getPersonDecrator(this);
+                                }
+                            });
+
+                        })
+
+                        people = people.sort(function(a, b) {
+                            return a.name > b.name;
+                        });
+
+                        deferred.resolve({
+                            viewName: that.viewName,
+                            viewHelper: ViewHelper,
+                            people:people
+                        });
+                    });
+                
+
+                return deferred.promise();
             },
 
             // helpers
             
             createPerson: function(personName) {
-                this.peopleStore.add({name: personName});
+                this.peopleStore.add({
+                    name: personName,
+                    isInvolved: true
+                });
             },
 
             // event handlers
@@ -84,7 +118,11 @@ window.eatThere = window.eatThere || {};
                     return o.id == peopleId; 
                 })[0];
 
-                console.log('clicked people item', peopleData);
+                if(peopleData !== undefined) {
+                    console.log('clicked people item', peopleData);
+                    peopleData.isInvolved = peopleData.isInvolved === true ? false : true;
+                    this.peopleStore.update(peopleData.id, peopleData);
+                }
             }
         }
     );

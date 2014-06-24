@@ -16,6 +16,10 @@ window.eatThere = window.eatThere || {};
             this.template     = this.viewNode.find('.template').html();
         },
 
+        initOnce: function initOnce() {
+
+        },
+
         initBindings: function initBindings() {
 
         },
