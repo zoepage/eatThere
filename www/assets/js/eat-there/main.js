@@ -60,7 +60,7 @@ $(function() {
         'eatery-view',
     ];
 
-    startingViewName = 'people-view';
+    startingViewName = 'main-view';
 
     /* Helpers */
 
@@ -250,6 +250,8 @@ $(function() {
     function handleLogoTap(evnt) {
         var randomEatery;
 
+        console.log('randomEatery: ' + randomEatery);
+
         randomEatery = fetchRandomEatery();
 
         function fadeIn() {
@@ -297,7 +299,7 @@ $(function() {
         $hammertime.on("swipeleft",  handleStageSwipeLeft);
         $hammertime.on("swiperight", handleStageSwipeRight);
 
-        Hammer($logo).on('tap', handleLogoTap);
+        Hammer($logo).on('touch', handleLogoTap);
 
         initMobileBindings();
     }

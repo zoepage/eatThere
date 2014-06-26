@@ -324,11 +324,13 @@ nav.startscreen .item.swipe-right {
     border: none;
 }
 
-#people-view .person {
-    text-decoration: line-through;
+#people-view .person{
     color: grey;
     font-size: 1.6em;
 }
+
+#people-view .person span.name-ppl { color: grey; text-decoration: line-through;}
+#people-view .person .delete-ppl { margin-left: 45px; }
 
 #people-view .person:hover {
     cursor: pointer;
@@ -336,6 +338,7 @@ nav.startscreen .item.swipe-right {
 }
 
 #people-view .person.involved {
-    text-decoration: none;
     color: white;
 }
+
+#people-view .person.involved span.name-ppl { color: white;  text-decoration: none;}

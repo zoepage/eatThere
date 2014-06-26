@@ -41,13 +41,21 @@ window.eatThere = window.eatThere || {};
                 hoodie.store.on('people:update', function(updatedPerson) {
                     that.update();
                 });
+
+                hoodie.store.on('people:remove', function(deletedPerson) {
+                    that.update();
+                });
             },
 
             initBindings: function() {
                 var that = this;
 
-                this.viewNode.find('li').click(function(evnt) {
+                this.viewNode.find('li .name-ppl').click(function(evnt) {
                     that.handlePeopleItemClicked(evnt);
+                });
+
+                this.viewNode.find('li .delete-ppl').click(function(evnt) {
+                    that.handlePeopleDeleteItemClicked(evnt);
                 });
 
                 this.viewNode.find('[data-js="create-person"]').keyup(function(evnt) {
@@ -112,7 +120,7 @@ window.eatThere = window.eatThere || {};
                     peopleId,
                     peopleData;
 
-                peopleItem = $(evnt.currentTarget);
+                peopleItem = $(evnt.currentTarget).parent();
                 peopleId   = peopleItem.attr('data-id');
                 peopleData = this.viewData.people.filter(function(o) { 
                     return o.id == peopleId; 
@@ -122,6 +130,23 @@ window.eatThere = window.eatThere || {};
                     console.log('clicked people item', peopleData);
                     peopleData.isInvolved = peopleData.isInvolved === true ? false : true;
                     this.peopleStore.update(peopleData.id, peopleData);
+                }
+            },
+
+            handlePeopleDeleteItemClicked: function(evnt) {
+                var peopleItem,
+                    peopleId,
+                    peopleData;
+
+                peopleItem = $(evnt.currentTarget).parent();
+                peopleId   = peopleItem.attr('data-id');
+                peopleData = this.viewData.people.filter(function(o) { 
+                    return o.id == peopleId; 
+                })[0];
+
+                if(peopleData !== undefined) {
+                    console.log('delete people item', peopleData);
+                    this.peopleStore.remove(peopleData.id, peopleData);
                 }
             }
         }

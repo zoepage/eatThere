@@ -95,12 +95,12 @@
                         <div id="people" class="list">
                             <ul>
                                 <li><h2>People</h2></li>
-                                {{#people}}
-                                    <li class="{{states}}" data-id="{{id}}">{{name}}</li>
-                                {{/people}}
                                 <li>
                                     <input class="person-name" type="text" placeholder="Name of the Person ⏎" data-js="create-person"/>
                                 </li>
+                                {{#people}}
+                                    <li class="{{states}}" data-id="{{id}}"><span class="name-ppl">{{name}}</span><span class="delete-ppl">x</span></li>
+                                {{/people}}
                             </ul>
                         </div>
                     </script>
