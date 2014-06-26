@@ -98,7 +98,7 @@ li[data-hoodie-action] {
     border-top-right-radius: 6px;
 }
 
-form[data-add] input {
+div[data-add] input {
     margin-top: 35px;
 
     background: url(../img/enter.png) 195px no-repeat #fff;
@@ -309,13 +309,10 @@ nav.startscreen .item.swipe-right {
 #people-view ul {
     height: inherit;
     position: relative;
-    padding-top: 100px;
 }
 
 #people-view ul li:first-child {
-    position: absolute;
-    top: 0;
-    left: 0;
+
     width: 98%;
     border: none;
 }

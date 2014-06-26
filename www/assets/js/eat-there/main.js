@@ -26,6 +26,7 @@ $(function() {
         $logo,
         $eatery,
         $addEatery,
+        $addPerson,
         $item,
         $hammertime,
         hoodie;
@@ -43,6 +44,7 @@ $(function() {
     $logo         = $('#logo');
     $eatery       = $('#eatery');
     $addEatery    = $('#addEatery');
+    $addPerson    = $('#addPerson h2');
     $item         = $('.stage ul li');
     $hammertime   = $stage.hammer();
 
@@ -217,21 +219,18 @@ $(function() {
             };
         }
 
+        // prevent click event on input
+        if ($(evnt.target).hasClass('person-name')) {  
+        } else { 
+
         $listItem
             .animate(animation, duration)
             .toggleClass('open');
 
+
         // @TODO save in var + small bug on first animation
-        $('form').fadeToggle(500);
-
-
-         // @TODO save in var and clean up 
-        $addEatery.keypress(function(e){
-           if(e.which == 13){
-                attributes = {title: e.target.value};
-                hoodie.store.add('eatery', attributes); // insert valid JSON
-           }
-        });
+        $listItem.find('div').fadeToggle(500);
+}
     }
 
     function handleEateryItemHold(evnt) {
@@ -381,7 +380,8 @@ $(function() {
                 action;
 
             eventHandlers = {
-                'addEatery':handleEateryTitleHold
+                'addEatery':handleEateryTitleHold,
+                'addPerson':handleEateryTitleHold
             }
             action = $(this).attr('data-hoodie-action');
 

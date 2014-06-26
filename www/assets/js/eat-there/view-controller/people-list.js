@@ -55,7 +55,7 @@ window.eatThere = window.eatThere || {};
                 });
 
                 this.viewNode.find('li .delete-ppl').click(function(evnt) {
-                    that.handlePeopleDeleteItemClicked(evnt);
+                    that.handlePeopleItemDelete(evnt);
                 });
 
                 this.viewNode.find('[data-js="create-person"]').keyup(function(evnt) {
@@ -64,6 +64,7 @@ window.eatThere = window.eatThere || {};
                     // on enter pressed
                     if(evnt.keyCode == 13) {
                         personName = $(evnt.target).val();
+
 
                         $(evnt.target).val(undefined);
                         that.createPerson(personName);
@@ -133,7 +134,7 @@ window.eatThere = window.eatThere || {};
                 }
             },
 
-            handlePeopleDeleteItemClicked: function(evnt) {
+            handlePeopleItemDelete: function(evnt) {
                 var peopleItem,
                     peopleId,
                     peopleData;

@@ -94,10 +94,14 @@
                     <script class="template" type="x-tmpl-mustache">
                         <div id="people" class="list">
                             <ul>
-                                <li><h2>People</h2></li>
-                                <li>
-                                    <input class="person-name" type="text" placeholder="Name of the Person ⏎" data-js="create-person"/>
+                                <li data-hoodie-action="addPerson">
+                                    <h2>People</h2>
+                                    <div class="hide" data-add="">
+                                        <input id="addPerson" class="person-name" type="text" placeholder="e.g. Dennis" data-js="create-person" autofocus />
+                                    </div>
+                                    
                                 </li>
+                               
                                 {{#people}}
                                     <li class="{{states}}" data-id="{{id}}"><span class="name-ppl">{{name}}</span><span class="delete-ppl">x</span></li>
                                 {{/people}}
@@ -126,9 +130,9 @@
                             <ul>
                                 <li data-hoodie-action="addEatery">
                                     <h2>Eateries</h2>
-                                    <form action="" class="hide" data-add="">
-                                        <input id="addEatery" type="text" data-add-eatery="" value="" placeholder="z.B. Bäcker" autofocus />
-                                    </form>
+                                    <div class="hide" data-add="">
+                                        <input id="addEatery" type="text" data-add-eatery="" value="" placeholder="z.B. Bäcker" />
+                                    </div>
                                 </li>
                                 {{#eateries}}
                                     <li>{{name}}</li>
