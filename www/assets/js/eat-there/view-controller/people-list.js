@@ -112,18 +112,17 @@ window.eatThere = window.eatThere || {};
             handlePeopleItemClicked: function(evnt) {
                 var peopleItem,
                     peopleId,
-                    peopleData;
+                    person;
 
                 peopleItem = $(evnt.currentTarget).parent();
                 peopleId   = peopleItem.attr('data-id');
-                peopleData = this.viewData.people.filter(function(o) { 
+                person     = this.viewData.people.filter(function(o) { 
                     return o.id == peopleId; 
                 })[0];
 
-                if(peopleData !== undefined) {
-                    peopleData.isInvolved = peopleData.isInvolved === true ? false : true;
-                    // @TODO 
-                    this.peopleStore.update(peopleData.id, peopleData);
+                if(person !== undefined) {
+                    person.isInvolved = person.isInvolved === true ? false : true;
+                    person.save();
                 }
             },
 

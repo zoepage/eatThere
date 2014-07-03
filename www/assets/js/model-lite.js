@@ -195,7 +195,14 @@ utils.mixin(Adapter.prototype, new (function () {
           // in all cases wrap raw data results 
           // into model instances
           res = items.map(function(item) {
-            return query.model.create(item, {scenario: query.opts.scenario})
+            var instance;
+
+            instance        = query.model.create(item, {scenario: query.opts.scenario});
+            instance.id     = item.id;
+            instance._id    = item.id;
+            instance._saved = true;
+
+            return instance;
           });
 
           // query a single one
@@ -208,15 +215,17 @@ utils.mixin(Adapter.prototype, new (function () {
   };
 
   this.update = function (data, query, callback) {
-    var datastore = this._getDatastore()
-      , key = query.model.modelName
-      , id = query.byId
+
+    var modelName = query.model.modelName
+      , storeName = modelName.toLowerCase()
+      , datastore = this._getDatastore(storeName)
+      , props     = model.descriptionRegistry[modelName].properties
+      , id        = query.byId
       , ids;
 
-    // Lazy-create the collection
-    if (!datastore[key]) {
-      datastore[key] = {};
-    }
+    data = _filterByProperties(data, props);
+
+    debugger;
 
     if (id) {
       ids = [id];
@@ -238,20 +247,21 @@ utils.mixin(Adapter.prototype, new (function () {
         });
       }
     }
-    ids.forEach(function (id) {
-      var item = model[key].create(datastore[key][id]);
-      item.updateProperties(data);
-      datastore[key][id] = item;
 
-    });
-    if (data instanceof model.ModelBase) {
-      this._writeDatastore(datastore);
-      callback(null, data);
-    }
-    else {
-      this._writeDatastore(datastore);
-      callback(null, true);
-    }
+    (function updateAll(ids) {
+      var id;
+
+      if(ids.length === 0) {
+        // @TODO return updated objects instead
+        callback(null, true);
+      } else {
+        id = ids.pop();
+        datastore.update(id, data).then(function() {
+          updateAll(ids);
+        });
+      }
+    })(ids);
+
   };
 
   this.remove = function (query, callback) {
@@ -289,7 +299,7 @@ utils.mixin(Adapter.prototype, new (function () {
       if(ids.length === 0) {
         callback(null, true);
       } else {
-        id = ids.pop()
+        id = ids.pop();
         datastore.remove(id).then(function() {
           removeAll(ids);
         });
@@ -305,6 +315,8 @@ utils.mixin(Adapter.prototype, new (function () {
       , storeName = modelName.toLowerCase()
       , datastore = this._getDatastore(storeName)
       , props     = model.descriptionRegistry[modelName].properties;
+
+    debugger;
 
     data = _filterByProperties(data, props);
     datastore.add(data).then(function(data) {
