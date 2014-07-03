@@ -121,8 +121,8 @@ window.eatThere = window.eatThere || {};
                 })[0];
 
                 if(peopleData !== undefined) {
-                    console.log('clicked people item', peopleData);
                     peopleData.isInvolved = peopleData.isInvolved === true ? false : true;
+                    // @TODO 
                     this.peopleStore.update(peopleData.id, peopleData);
                 }
             },
@@ -130,17 +130,16 @@ window.eatThere = window.eatThere || {};
             handlePeopleItemDelete: function(evnt) {
                 var peopleItem,
                     peopleId,
-                    peopleData;
+                    person;
 
                 peopleItem = $(evnt.currentTarget).parent();
                 peopleId   = peopleItem.attr('data-id');
-                peopleData = this.viewData.people.filter(function(o) { 
+                person     = this.viewData.people.filter(function(o) { 
                     return o.id == peopleId; 
                 })[0];
 
-                if(peopleData !== undefined) {
-                    console.log('delete people item', peopleData);
-                    this.peopleStore.remove(peopleData.id, peopleData);
+                if(person !== undefined) {
+                    People.remove(person.id);
                 }
             }
         }

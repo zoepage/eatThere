@@ -255,15 +255,12 @@ utils.mixin(Adapter.prototype, new (function () {
   };
 
   this.remove = function (query, callback) {
-    var datastore = this._getDatastore()
-      , key = query.model.modelName
-      , id = query.byId
-      , ids;
 
-    // Lazy-create the collection
-    if (!datastore[key]) {
-      datastore[key] = {};
-    }
+    var modelName = query.model.modelName
+      , storeName = modelName.toLowerCase()
+      , datastore = this._getDatastore(storeName)
+      , id        = query.byId
+      , ids;
 
     if (id) {
       ids = [id];
@@ -285,11 +282,20 @@ utils.mixin(Adapter.prototype, new (function () {
         });
       }
     }
-    ids.forEach(function (id) {
-      delete datastore[key][id];
-    });
-    this._writeDatastore(datastore);
-    callback(null, true);
+
+    (function removeAll(ids) {
+      var id;
+
+      if(ids.length === 0) {
+        callback(null, true);
+      } else {
+        id = ids.pop()
+        datastore.remove(id).then(function() {
+          removeAll(ids);
+        });
+      }
+    })(ids);
+
   };
 
   this.insert = function (data, opts, callback) {
