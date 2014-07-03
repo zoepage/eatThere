@@ -3,6 +3,7 @@
 window.eatThere = window.eatThere || {};
 
 (function() {
+    var People = window.eatThere.models.People;
 
     var ViewHelper = {
         getPersonDecrator: function(person) {
@@ -65,7 +66,6 @@ window.eatThere = window.eatThere || {};
                     if(evnt.keyCode == 13) {
                         personName = $(evnt.target).val();
 
-
                         $(evnt.target).val(undefined);
                         that.createPerson(personName);
                     }
@@ -76,31 +76,28 @@ window.eatThere = window.eatThere || {};
                 var that     = this,
                     deferred = jQuery.Deferred();
 
-                this.peopleStore
-                    .findAll()
-                    .then(function(people) {
-
-                        // @TODO create a more fancy model
-                        people.forEach(function(person) {
-                            Object.defineProperty(person, 'states', {
-                                get: function() {
-                                    return ViewHelper.getPersonDecrator(this);
-                                }
-                            });
-
-                        })
-
-                        people = people.sort(function(a, b) {
-                            return a.name > b.name;
-                        });
-
-                        deferred.resolve({
-                            viewName: that.viewName,
-                            viewHelper: ViewHelper,
-                            people:people
+                People.all(function(err, people) {
+                    // @TODO create a more fancy model
+                    people.forEach(function(person) {
+                        Object.defineProperty(person, 'states', {
+                            get: function() {
+                                return ViewHelper.getPersonDecrator(this);
+                            }
                         });
                     });
-                
+
+                    // @TODO: fix the sort
+                    people = people.sort(function(a, b) {
+                        return a.name > b.name;
+                    });
+
+                    deferred.resolve({
+                        viewName: that.viewName,
+                        viewHelper: ViewHelper,
+                        people:people
+                    });
+
+                });
 
                 return deferred.promise();
             },
@@ -108,7 +105,7 @@ window.eatThere = window.eatThere || {};
             // helpers
             
             createPerson: function(personName) {
-                this.peopleStore.add({
+                People.createPerson({
                     name: personName,
                     isInvolved: true
                 });

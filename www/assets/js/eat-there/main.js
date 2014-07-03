@@ -394,4 +394,3 @@ $(function() {
     // pseudo main
     startApp();
 });
-
