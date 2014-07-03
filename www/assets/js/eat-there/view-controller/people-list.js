@@ -3,6 +3,7 @@
 window.eatThere = window.eatThere || {};
 
 (function() {
+    var People = window.eatThere.models.People;
 
     var ViewHelper = {
         getPersonDecrator: function(person) {
@@ -65,7 +66,6 @@ window.eatThere = window.eatThere || {};
                     if(evnt.keyCode == 13) {
                         personName = $(evnt.target).val();
 
-
                         $(evnt.target).val(undefined);
                         that.createPerson(personName);
                     }
@@ -76,31 +76,24 @@ window.eatThere = window.eatThere || {};
                 var that     = this,
                     deferred = jQuery.Deferred();
 
-                this.peopleStore
-                    .findAll()
+                People.allAscendingByName()
                     .then(function(people) {
-
-                        // @TODO create a more fancy model
+                        // @TODO find a less nasty solution
+                        // patch model a viewhelper
                         people.forEach(function(person) {
-                            Object.defineProperty(person, 'states', {
-                                get: function() {
-                                    return ViewHelper.getPersonDecrator(this);
-                                }
-                            });
-
-                        })
-
-                        people = people.sort(function(a, b) {
-                            return a.name > b.name;
+                          Object.defineProperty(person, 'states', {
+                              get: function() {
+                                  return ViewHelper.getPersonDecrator(this);
+                              }
+                          });
                         });
 
                         deferred.resolve({
-                            viewName: that.viewName,
-                            viewHelper: ViewHelper,
-                            people:people
+                          viewName: that.viewName,
+                          viewHelper: ViewHelper,
+                          people:people
                         });
                     });
-                
 
                 return deferred.promise();
             },
@@ -108,7 +101,7 @@ window.eatThere = window.eatThere || {};
             // helpers
             
             createPerson: function(personName) {
-                this.peopleStore.add({
+                People.createPerson({
                     name: personName,
                     isInvolved: true
                 });
@@ -119,35 +112,33 @@ window.eatThere = window.eatThere || {};
             handlePeopleItemClicked: function(evnt) {
                 var peopleItem,
                     peopleId,
-                    peopleData;
+                    person;
 
                 peopleItem = $(evnt.currentTarget).parent();
                 peopleId   = peopleItem.attr('data-id');
-                peopleData = this.viewData.people.filter(function(o) { 
+                person     = this.viewData.people.filter(function(o) { 
                     return o.id == peopleId; 
                 })[0];
 
-                if(peopleData !== undefined) {
-                    console.log('clicked people item', peopleData);
-                    peopleData.isInvolved = peopleData.isInvolved === true ? false : true;
-                    this.peopleStore.update(peopleData.id, peopleData);
+                if(person !== undefined) {
+                    person.isInvolved = person.isInvolved === true ? false : true;
+                    person.save();
                 }
             },
 
             handlePeopleItemDelete: function(evnt) {
                 var peopleItem,
                     peopleId,
-                    peopleData;
+                    person;
 
                 peopleItem = $(evnt.currentTarget).parent();
                 peopleId   = peopleItem.attr('data-id');
-                peopleData = this.viewData.people.filter(function(o) { 
+                person     = this.viewData.people.filter(function(o) { 
                     return o.id == peopleId; 
                 })[0];
 
-                if(peopleData !== undefined) {
-                    console.log('delete people item', peopleData);
-                    this.peopleStore.remove(peopleData.id, peopleData);
+                if(person !== undefined) {
+                    People.remove(person.id);
                 }
             }
         }
