@@ -76,28 +76,24 @@ window.eatThere = window.eatThere || {};
                 var that     = this,
                     deferred = jQuery.Deferred();
 
-                People.all(function(err, people) {
-                    // @TODO create a more fancy model
-                    people.forEach(function(person) {
-                        Object.defineProperty(person, 'states', {
-                            get: function() {
-                                return ViewHelper.getPersonDecrator(this);
-                            }
+                People.allAscendingByName()
+                    .then(function(people) {
+                        // @TODO find a less nasty solution
+                        // patch model a viewhelper
+                        people.forEach(function(person) {
+                          Object.defineProperty(person, 'states', {
+                              get: function() {
+                                  return ViewHelper.getPersonDecrator(this);
+                              }
+                          });
+                        });
+
+                        deferred.resolve({
+                          viewName: that.viewName,
+                          viewHelper: ViewHelper,
+                          people:people
                         });
                     });
-
-                    // @TODO: fix the sort
-                    people = people.sort(function(a, b) {
-                        return a.name > b.name;
-                    });
-
-                    deferred.resolve({
-                        viewName: that.viewName,
-                        viewHelper: ViewHelper,
-                        people:people
-                    });
-
-                });
 
                 return deferred.promise();
             },

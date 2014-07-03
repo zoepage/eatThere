@@ -4,7 +4,7 @@
 
     var People = function () {
       // @TODO: unmock and loosely wire adapter. 
-      this.setAdapter('hoodie');
+      this.setAdapter('memory');
 
       this.defineProperties({
         name:       { type: 'string', required: true },
@@ -24,9 +24,31 @@
             deferred.resolve(person);
         });
 
-        debugger;
-
         return deferred.promise();
+    };
+
+    People.allAscendingByName = function allAscendingByName() {
+      var deferred = jQuery.Deferred();
+
+      People.all(function(err, people) {
+          people = people.sort(function(a, b) {
+              var direction = 0,
+                  aName     = a.name.toLowerCase(),
+                  bName     = b.name.toLowerCase();
+
+              if(aName < bName) {
+                  direction = -1;
+              } else if(aName > bName) {
+                  direction = 1;
+              }
+
+              return direction;
+          });
+
+          deferred.resolve(people);
+      });
+
+      return deferred.promise()
     };
 
     window.eatThere.models.People = People;
