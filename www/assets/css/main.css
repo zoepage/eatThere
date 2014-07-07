@@ -195,10 +195,6 @@ ul {
     margin-top: 4px;
 }
 
-.strike {
-    text-decoration: line-through;
-    opacity: 0.5;
-}
 
 /* -------------------------- TYPO -------------------------- */
 
@@ -302,40 +298,55 @@ nav.startscreen .item.swipe-right {
 
 /* People View */
 
-#people-view .person-name {
+.view .person-name,
+.view .eatery-name {
     text-align: center;
 }
 
-#people-view ul {
+#people-view ul,
+#eatery-view ul {
     height: inherit;
     position: relative;
 }
 
-#people-view ul li:first-child {
+#people-view ul li:first-child,
+#eatery-view ul li:first-child{
 
     width: 98%;
     border: none;
 }
 
-#people-view ul li:last-child {
+#people-view ul li:last-child,
+#eatery-view ul li:last-child{
     border: none;
 }
 
-#people-view .person{
+.view .person,
+.view .eatery{
     color: grey;
     font-size: 1.6em;
 }
 
-#people-view .person span.name-ppl { color: grey; text-decoration: line-through;}
-#people-view .person .delete-ppl { margin-left: 45px; }
+.view .person span.name-ppl,
+.view .eatery span.name-eatery 
+{ 
+        color: grey; 
+        text-decoration: line-through;
+}
 
-#people-view .person:hover {
+.view .person .delete-ppl,
+.view .eatery .delete-eatery { margin-left: 45px; }
+
+.view .person:hover,
+.view .eatery:hover {
     cursor: pointer;
     background-color: rgba(50, 50, 50, 0.4);
 }
 
-#people-view .person.involved {
+.view .person.involved,
+.view .eatery.involved {
     color: white;
 }
 
-#people-view .person.involved span.name-ppl { color: white;  text-decoration: none;}
+.view .person.involved span.name-ppl,
+.view .eatery.involved span.name-eatery { color: white;  text-decoration: none;}
