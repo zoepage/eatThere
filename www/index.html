@@ -131,12 +131,12 @@
                                 <li data-hoodie-action="addEatery">
                                     <h2>Eateries</h2>
                                     <div class="hide" data-add="">
-                                        <input id="addEatery" type="text" data-add-eatery="" value="" placeholder="z.B. Bäcker" />
+                                        <input id="addEatery" class="eatery-name" type="text" value="" placeholder="z.B. Bäcker" data-js="create-eatery" autofocus />
                                     </div>
                                 </li>
-                                {{#eateries}}
-                                    <li>{{name}}</li>
-                                {{/eateries}}
+                                {{#eatery}}
+                                    <li class="{{states}}" data-id="{{id}}"><span class="name-eatery">{{title}}</span><span class="delete-eatery">x</span></li>
+                                {{/eatery}}
                             </ul>
                         </div>
                     </script>
@@ -157,6 +157,7 @@
         
         <script src="assets/js/eat-there/helpers.js"></script>
         <script src="assets/js/eat-there/models/people.js"></script>
+        <script src="assets/js/eat-there/models/eatery.js"></script>
         <script src="assets/js/eat-there/view-controller/_base.js"></script>
         <script src="assets/js/eat-there/view-controller/eatery-list.js"></script>
         <script src="assets/js/eat-there/view-controller/people-list.js"></script>

@@ -225,7 +225,7 @@ utils.mixin(Adapter.prototype, new (function () {
 
     data = _filterByProperties(data, props);
 
-    debugger;
+  /*  debugger; */
 
     if (id) {
       ids = [id];
@@ -316,7 +316,7 @@ utils.mixin(Adapter.prototype, new (function () {
       , datastore = this._getDatastore(storeName)
       , props     = model.descriptionRegistry[modelName].properties;
 
-    debugger;
+    /* debugger; */
 
     data = _filterByProperties(data, props);
     datastore.add(data).then(function(data) {
