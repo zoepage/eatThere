@@ -1,12 +1,12 @@
 {
   "name": "eatHoodie",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "app",
   "dependencies": {
-    "hoodie-server": "0.9.19",
-    "hoodie-plugin-appconfig": "~0.1.0",
-    "hoodie-plugin-email": "~0.1.1",
-    "hoodie-plugin-users": "0.1.0"
+    "hoodie-server": "^0.9.28",
+    "hoodie-plugin-appconfig": "^0.1.4",
+    "hoodie-plugin-email": "^0.1.5",
+    "hoodie-plugin-users": "^0.1.1"
   },
   "subdomain": "hoodie-eatHoodie",
   "domains": [
