@@ -49,7 +49,24 @@
           deferred.resolve(eatery);
       });
 
-      return deferred.promise()
+      return deferred.promise();
+    };
+
+    Eatery.getRandomEatery = function getRandomEatery(){
+      var deferred = jQuery.Deferred();
+
+      Eatery.all(function(err, eateries) {
+
+        eateries = eateries.filter( function(e) {
+          return e.isWanted == true;
+        });
+
+          var eatery = eateries[Math.round(Math.random() * 9999999) % eateries.length];
+          
+
+          deferred.resolve(eatery);
+      });
+      return deferred.promise();
     };
 
     window.eatThere.models.Eatery = Eatery;

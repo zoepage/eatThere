@@ -128,10 +128,6 @@ $(function() {
         }
     }
 
-    function fetchRandomEatery() {
-        return eateries[Math.round(Math.random() * 9999999) % eateries.length];
-    }
-
     function renderListData() {
         var $eateryList,
             $peopleList,
@@ -246,27 +242,6 @@ $(function() {
         swipeRight();
     }
 
-    function handleLogoTap(evnt) {
-        var randomEatery;
-
-        console.log('randomEatery: ' + randomEatery);
-
-        randomEatery = fetchRandomEatery();
-
-        function fadeIn() {
-            $eatery.find('.title').html(randomEatery);
-            $eatery.fadeIn(500, function() {
-                $(this).removeClass('hide');
-            });
-        }
-
-        if($eatery.hasClass('hide')){
-            fadeIn();
-        } else {
-            $eatery.fadeOut(250, fadeIn);
-        }
-    }
-
     // ------- delete item -------
     // ******* @ToDo add delete of item in storage
     function deleteItem(){
@@ -297,8 +272,6 @@ $(function() {
         $btn.bind('click', toggleMenu);
         $hammertime.on("swipeleft",  handleStageSwipeLeft);
         $hammertime.on("swiperight", handleStageSwipeRight);
-
-        Hammer($logo).on('touch', handleLogoTap);
 
         initMobileBindings();
     }
@@ -352,16 +325,7 @@ $(function() {
 
     function initData() {
 
-        // eateries = [
-        //     'Thai',
-        //     'Bäcker',
-        //     'Currybox',
-        //     'Happy Happy Ding Dong'
-        // ];
-
-        // people.sort(orderStringsAscending);
-        // eateries.sort(orderStringsAscending);
-    }
+        }
 
     function startApp() {
         environment = ENV_DEV;

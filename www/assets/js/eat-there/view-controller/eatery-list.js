@@ -143,7 +143,6 @@ window.eatThere = window.eatThere || {};
                 }
             }
             
-            
         }
     );
 
