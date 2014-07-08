@@ -220,7 +220,7 @@ $(function() {
         }
 
         // prevent click event on input
-        if ($(evnt.target).hasClass('person-name')) {  
+        if ($(evnt.target).hasClass('person-name') || $(evnt.target).hasClass('eatery-name')) {  
         } else { 
 
         $listItem
