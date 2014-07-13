@@ -340,12 +340,16 @@ nav.startscreen .item.swipe-right {
 .view .person span.name-ppl,
 .view .eatery span.name-eatery 
 { 
-        color: grey; 
-        text-decoration: line-through;
+    color: grey; 
+    text-decoration: line-through;
 }
 
 .view .person .delete-ppl,
-.view .eatery .delete-eatery { margin-left: 45px; }
+.view .eatery .delete-eatery {
+    position: absolute;
+    right: 35px;
+    top: 17px;
+}
 
 .view .person:hover,
 .view .eatery:hover {
