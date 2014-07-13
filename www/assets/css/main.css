@@ -310,12 +310,19 @@ nav.startscreen .item.swipe-right {
 #eatery-view ul {
     height: inherit;
     position: relative;
+    overflow-x: hidden;
+}
+
+#people-view ul li:first-child,
+#eatery-view ul li:first-child,
+#people-view .person,
+#eatery-view .eatery {
+    position: relative;
+    width: 95%;
 }
 
 #people-view ul li:first-child,
 #eatery-view ul li:first-child{
-
-    width: 98%;
     border: none;
 }
 
